@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.cos.dao.ConsumableTypeMapper">
+
+    <!-- 分页查询耗材类型信息 -->
+    <select id="selectConsumablePage" resultType="java.util.LinkedHashMap">
+        SELECT
+        ct.*,
+        ct1.`name` AS pname
+        FROM
+        consumable_type ct
+        LEFT JOIN consumable_type ct1 ON ( ct.pid = ct1.id )
+        WHERE
+        1 = 1
+        <if test="consumableType.name != null and consumableType.name != ''">
+            AND ct.name LIKE CONCAT('%',#{consumableType.name},'%')
+        </if>
+        <if test="consumableType.content != null and consumableType.content != ''">
+            AND ct.content LIKE CONCAT('%',#{consumableType.content},'%')
+        </if>
+        ORDER BY
+        ct.create_date DESC
+    </select>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.cos.dao.ReplenishmentInfoMapper">
+
+    <!-- 分页查询盘库信息 -->
+    <select id="selectReplenishmentPage" resultType="java.util.LinkedHashMap">
+        SELECT
+        ri.id,
+        ri.task_date AS taskDate,
+        ri.content,
+        ri.status,
+        ri.replenishment,
+        ri.staff_code
+        FROM replenishment_info ri
+        WHERE 1 = 1
+        <if test="replenishmentInfo.name != null and replenishmentInfo.name != ''">
+            AND ri.replenishment LIKE CONCAT('%',#{replenishmentInfo.name},'%')
+        </if>
+        <if test="replenishmentInfo.startDate != null and replenishmentInfo.endDate != ''">
+            AND ri.task_date BETWEEN #{replenishmentInfo.startDate} AND #{replenishmentInfo.endDate}
+        </if>
+        ORDER BY ri.task_date DESC
+    </select>
+</mapper>

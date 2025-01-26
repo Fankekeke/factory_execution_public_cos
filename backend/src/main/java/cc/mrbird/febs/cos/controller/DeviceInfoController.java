@@ -34,7 +34,7 @@ public class DeviceInfoController {
      */
     @GetMapping("/page")
     public R page(Page<DeviceInfo> page, DeviceInfo deviceInfo) {
-        return R.ok();
+        return R.ok(deviceInfoService.queryDeviceList(page, deviceInfo));
     }
 
     /**

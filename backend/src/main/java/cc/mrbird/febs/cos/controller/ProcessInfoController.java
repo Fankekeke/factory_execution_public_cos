@@ -32,7 +32,7 @@ public class ProcessInfoController {
      */
     @GetMapping("/page")
     public R page(Page<ProcessInfo> page, ProcessInfo processInfo) {
-        return R.ok();
+        return R.ok(processInfoService.queryProcessPage(page, processInfo));
     }
 
     /**

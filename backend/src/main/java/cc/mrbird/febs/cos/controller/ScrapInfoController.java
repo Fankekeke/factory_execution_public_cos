@@ -32,7 +32,7 @@ public class ScrapInfoController {
      */
     @GetMapping("/page")
     public R page(Page<ScrapInfo> page, ScrapInfo scrapInfo) {
-        return R.ok();
+        return R.ok(scrapInfoService.queryScrapPage(page, scrapInfo));
     }
 
     /**

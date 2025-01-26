@@ -32,7 +32,7 @@ public class ProductionProcessInfoController {
      */
     @GetMapping("/page")
     public R page(Page<ProductionProcessInfo> page, ProductionProcessInfo productionProcessInfo) {
-        return R.ok();
+        return R.ok(productionProcessInfoService.queryProductionProcessPage(page, productionProcessInfo));
     }
 
     /**

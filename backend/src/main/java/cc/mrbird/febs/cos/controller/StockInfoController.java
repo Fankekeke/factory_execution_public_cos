@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 
 /**
- * @author FanK
+ * @author FanK fan1ke2ke@gmail.com
  */
 @RestController
 @RequestMapping("/cos/stock-info")

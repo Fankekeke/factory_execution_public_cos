@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 /**
  * 实验套餐管理
  *
- * @author FanK
+ * @author FanK fan1ke2ke@gmail.com
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

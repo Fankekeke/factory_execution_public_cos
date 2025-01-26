@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author FanK
+ * @author FanK fan1ke2ke@gmail.com
  */
 @RestController
 @RequestMapping("/cos/stock-out")

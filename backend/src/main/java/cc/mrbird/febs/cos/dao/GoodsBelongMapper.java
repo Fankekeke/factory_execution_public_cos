@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
- * @author FanK
+ * @author FanK fan1ke2ke@gmail.com
  */
 public interface GoodsBelongMapper extends BaseMapper<GoodsBelong> {
 

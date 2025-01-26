@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedHashMap;
 
 /**
- * @author FanK
+ * @author FanK fan1ke2ke@gmail.com
  */
 @Service
 public class StockPutServiceImpl extends ServiceImpl<StockPutMapper, StockPut> implements IStockPutService {

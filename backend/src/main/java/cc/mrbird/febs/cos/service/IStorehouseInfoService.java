@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.LinkedHashMap;
 
 /**
- * @author FanK
+ * @author FanK fan1ke2ke@gmail.com
  */
 public interface IStorehouseInfoService extends IService<StorehouseInfo> {
 

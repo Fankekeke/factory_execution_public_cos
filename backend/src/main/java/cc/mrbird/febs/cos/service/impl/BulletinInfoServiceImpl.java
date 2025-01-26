@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
- * @author FanK
+ * @author FanK fan1ke2ke@gmail.com
  */
 @Service
 public class BulletinInfoServiceImpl extends ServiceImpl<BulletinInfoMapper, BulletinInfo> implements IBulletinInfoService {

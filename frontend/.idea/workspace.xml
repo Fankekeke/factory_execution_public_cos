@@ -5,8 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d94e285-d1b0-4ce5-8593-dca4515a0d01" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/febs_shiro_jwt.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/febs_shiro_jwt.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/admin/Admin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/admin/Admin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/bulletin/Bulletin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/bulletin/Bulletin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/combo/Combo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/combo/Combo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/details/Details.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/details/Details.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/enterprise/Enterprise.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/enterprise/Enterprise.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/goods/Goods.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/goods/Goods.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/replenishment/Replenishment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/replenishment/Replenishment.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/rurchase/Rurchase.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/rurchase/Rurchase.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/stock/Stock.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/stock/Stock.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/stockout/Stockout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/stockout/Stockout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/stockput/Stockput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/stockput/Stockput.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/store/Store.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/store/Store.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/student/Student.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/student/Student.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/type/Type.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/type/Type.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/unit/Unit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/unit/Unit.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/purchase/record/Record.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/purchase/record/Record.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/purchase/request/Request.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/purchase/request/Request.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/purchase/rurchase/Rurchase.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/purchase/rurchase/Rurchase.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/stu/record/Record.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/stu/record/Record.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/stu/request/Request.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/stu/request/Request.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/system/user/User.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/user/User.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,18 +51,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;G:/Project/仓储管理系统/material_cos/frontend/src/views/purchase/request&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/dev/factory_execution_public_cos/frontend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\Project\仓储管理系统\material_cos\frontend\src\views\purchase\request" />
@@ -114,6 +134,7 @@
       <workItem from="1719489833639" duration="11860000" />
       <workItem from="1720092209140" duration="15615000" />
       <workItem from="1721219387314" duration="906000" />
+      <workItem from="1737869072584" duration="936000" />
     </task>
     <servers />
   </component>

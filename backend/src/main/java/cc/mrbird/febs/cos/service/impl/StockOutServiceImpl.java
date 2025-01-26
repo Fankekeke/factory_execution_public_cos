@@ -26,7 +26,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author FanK
+ * @author FanK fan1ke2ke@gmail.com
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

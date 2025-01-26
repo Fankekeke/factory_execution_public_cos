@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 /**
  * 耗材类型
  *
- * @author FanK
+ * @author FanK fan1ke2ke@gmail.com
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * @author fank
+ * @author FanK fan1ke2ke@gmail.com
  * @date 2021/6/9 17:00
  */
 public class FileDownloadUtils {

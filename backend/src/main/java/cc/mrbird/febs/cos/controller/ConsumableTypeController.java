@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author FanK
+ * @author FanK fan1ke2ke@gmail.com
  */
 @RestController
 @RequestMapping("/cos/consumable-type")

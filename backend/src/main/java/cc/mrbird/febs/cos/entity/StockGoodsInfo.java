@@ -70,6 +70,7 @@ public class StockGoodsInfo implements Serializable {
     private Integer isIn;
 
     private Integer stockId;
+    private Integer parentId;
 
 
 }

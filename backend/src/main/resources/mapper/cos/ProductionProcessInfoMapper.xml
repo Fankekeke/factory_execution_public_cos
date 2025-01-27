@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cc.mrbird.febs.cos.dao.ProductionProcessInfoMapper">
+<mapper namespace="cc.mrbird.febs.cos.dao.ProductionproductionProcessInfoMapper">
 
     <!-- 分页获取生产流程信息 -->
     <select id="queryProductionProcessPage" resultType="java.util.LinkedHashMap">
-
+        select
+        id,
+        code,
+        name,
+        step_num,
+        current_step,
+        content,
+        status,
+        lase_operator,
+        create_date
+        from
+        production_process_info
+        where
+        1 = 1
+        <if test="productionProcessInfo.code != null and productionProcessInfo.code != ''">
+            AND code LIKE CONCAT('%',#{productionProcessInfo.code},'%')
+        </if>
+        <if test="productionProcessInfo.name != null and productionProcessInfo.name != ''">
+            AND name LIKE CONCAT('%',#{productionProcessInfo.name},'%')
+        </if>
+        <if test="productionProcessInfo.status != null and productionProcessInfo.status != ''">
+            AND status = #{productionProcessInfo.status}
+        </if>
+        order by
+        create_date desc
     </select>
 </mapper>

@@ -4,6 +4,29 @@
 
     <!-- 分页获取设备信息 -->
     <select id="queryDeviceList" resultType="java.util.LinkedHashMap">
-
+        select
+        id,
+        code,
+        device_name,
+        device_charge,
+        phone,
+        content,
+        images,
+        status,
+        create_date,
+        `type`,
+        address
+        from
+        device_info
+        <if test="deviceInfo.deviceName != null and deviceInfo.deviceName != ''">
+            AND device_name LIKE CONCAT('%',#{deviceInfo.deviceName},'%')
+        </if>
+        <if test="deviceInfo.deviceCharge != null and deviceInfo.deviceCharge != ''">
+            AND device_charge LIKE CONCAT('%',#{deviceInfo.deviceCharge},'%')
+        </if>
+        where
+        1 = 1
+        order by
+        create_date desc
     </select>
 </mapper>

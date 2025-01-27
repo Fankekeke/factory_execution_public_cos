@@ -4,6 +4,29 @@
 
     <!-- 分页获取维保信息 -->
     <select id="queryRepairPage" resultType="java.util.LinkedHashMap">
-
+        select
+        ri.id,
+        ri.num,
+        ri.theme,
+        ri.dept_id,
+        ri.staff_id,
+        ri.content,
+        ri.create_date,
+        si.name,
+        si.images
+        from
+        repair_info ri
+        left join student_info si on
+        (si.id = ri.staff_id)
+        where
+        1 = 1
+        <if test="repairInfo.num != null and repairInfo.num != ''">
+            AND num LIKE CONCAT('%',#{repairInfo.num},'%')
+        </if>
+        <if test="repairInfo.theme != null and repairInfo.theme != ''">
+            AND theme LIKE CONCAT('%',#{repairInfo.theme},'%')
+        </if>
+        order by
+        ri.create_date desc
     </select>
 </mapper>

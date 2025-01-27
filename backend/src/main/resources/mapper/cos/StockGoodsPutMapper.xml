@@ -4,6 +4,27 @@
 
     <!-- 分页获取物资商品库房信息 -->
     <select id="queryStockGoodsPutPage" resultType="java.util.LinkedHashMap">
-
+        SELECT
+        sp.id,
+        sp.num,
+        sp.price,
+        sp.custodian,
+        sp.put_user AS putUser,
+        sp.content,
+        sp.create_date AS createDate
+        FROM
+        stock_goods_put sp
+        WHERE 1 = 1
+        <if test="stockPut.num != null and stockPut.num != ''">
+            AND sp.num LIKE CONCAT('%',#{stockPut.num},'%')
+        </if>
+        <if test="stockPut.putUser != null and stockPut.putUser != ''">
+            AND sp.put_user LIKE CONCAT('%',#{stockPut.putUser},'%')
+        </if>
+        <if test="stockPut.custodian != null and stockPut.custodian != ''">
+            AND sp.custodian LIKE CONCAT('%',#{stockPut.custodian},'%')
+        </if>
+        ORDER BY
+        sp.create_date DESC
     </select>
 </mapper>

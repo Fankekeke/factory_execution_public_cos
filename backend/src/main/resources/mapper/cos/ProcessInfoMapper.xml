@@ -4,6 +4,24 @@
 
     <!-- 分页获取流程管理信息 -->
     <select id="queryProcessPage" resultType="java.util.LinkedHashMap">
-
+        select
+        id,
+        name,
+        content,
+        step_index,
+        create_date,
+        role_id
+        from
+        process_info
+        where
+        1 = 1
+        <if test="processInfo.name != null and processInfo.name != ''">
+            AND name LIKE CONCAT('%',#{processInfo.name},'%')
+        </if>
+        <if test="processInfo.content != null and processInfo.content != ''">
+            AND content LIKE CONCAT('%',#{processInfo.content},'%')
+        </if>
+        order by
+        step_index asc
     </select>
 </mapper>

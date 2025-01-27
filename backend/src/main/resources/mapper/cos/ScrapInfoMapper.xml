@@ -4,6 +4,29 @@
 
     <!-- 分页获取物资报废信息 -->
     <select id="queryScrapPage" resultType="java.util.LinkedHashMap">
-
+        select
+        si.id,
+        si.num,
+        si.theme,
+        si.dept_id,
+        si.staff_id,
+        si.content,
+        si.create_date,
+        si2.name,
+        si2.images
+        from
+        scrap_info si
+        left join student_info si2 on
+        (si2.id = si.staff_id)
+        where
+        1 = 1
+        <if test="scrapInfo.num != null and scrapInfo.num != ''">
+            AND num LIKE CONCAT('%',#{scrapInfo.num},'%')
+        </if>
+        <if test="scrapInfo.theme != null and scrapInfo.theme != ''">
+            AND theme LIKE CONCAT('%',#{scrapInfo.theme},'%')
+        </if>
+        order by
+        si2.create_date desc
     </select>
 </mapper>

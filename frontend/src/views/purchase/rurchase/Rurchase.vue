@@ -8,7 +8,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="采购单号"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.num"/>
               </a-form-item>
@@ -16,7 +16,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="申请人"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.applicant"/>
               </a-form-item>
@@ -24,7 +24,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="采购状态"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-select v-model="queryParams.step" allowClear>
                   <a-select-option value="0">正在采购</a-select-option>

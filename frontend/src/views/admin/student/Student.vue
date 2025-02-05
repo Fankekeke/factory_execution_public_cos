@@ -8,7 +8,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="用户名称"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.name"/>
               </a-form-item>
@@ -16,7 +16,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="采购小组"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.team"/>
               </a-form-item>
@@ -24,7 +24,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="账号状态"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-select v-model="queryParams.accountStatus" allowClear>
                   <a-select-option value="0">封禁</a-select-option>

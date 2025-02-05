@@ -8,7 +8,7 @@
             <a-col :md="12" :sm="24" >
               <a-form-item
                 label="用户名"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.username"/>
               </a-form-item>
@@ -16,7 +16,7 @@
             <a-col :md="12" :sm="24" >
               <a-form-item
                 label="部门"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <dept-input-tree @change="handleDeptChange"
                                  ref="deptTree">
@@ -27,7 +27,7 @@
             <a-col :md="12" :sm="24" >
               <a-form-item
                 label="创建时间"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <range-date @change="handleDateChange" ref="createTime"></range-date>
               </a-form-item>

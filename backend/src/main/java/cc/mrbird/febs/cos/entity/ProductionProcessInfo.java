@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * 生成流程
+ * 生产流程
  *
  * @author FanK fan1ke2ke@gmail.com
  */

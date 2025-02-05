@@ -8,7 +8,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="物品名称"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.name"/>
               </a-form-item>
@@ -16,7 +16,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="物品型号"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.type"/>
               </a-form-item>
@@ -24,7 +24,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="物品类型"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-select v-model="queryParams.typeId" style="width: 100%" allowClear>
                   <a-select-option v-for="(item, index) in consumableType" :value="item.id" :key="index">{{ item.name }}</a-select-option>

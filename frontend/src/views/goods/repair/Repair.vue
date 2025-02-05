@@ -7,7 +7,15 @@
           <div :class="advanced ? null: 'fold'">
             <a-col :md="6" :sm="24">
               <a-form-item
-                label="物品名称"
+                label="申请单号"
+                :labelCol="{span: 5}"
+                :wrapperCol="{span: 18, offset: 1}">
+                <a-input v-model="queryParams.num"/>
+              </a-form-item>
+            </a-col>
+            <a-col :md="6" :sm="24">
+              <a-form-item
+                label="申请人"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.name"/>
@@ -15,19 +23,21 @@
             </a-col>
             <a-col :md="6" :sm="24">
               <a-form-item
-                label="物品型号"
+                label="采购小组"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
-                <a-input v-model="queryParams.type"/>
+                <a-input v-model="queryParams.team"/>
               </a-form-item>
             </a-col>
             <a-col :md="6" :sm="24">
               <a-form-item
-                label="物品类型"
+                label="审核状态"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
-                <a-select v-model="queryParams.typeId" style="width: 100%" allowClear>
-                  <a-select-option v-for="(item, index) in consumableType" :value="item.id" :key="index">{{ item.name }}</a-select-option>
+                <a-select v-model="queryParams.step" allowClear>
+                  <a-select-option value="0">正在审核</a-select-option>
+                  <a-select-option value="1">审核成功</a-select-option>
+                  <a-select-option value="2">驳回</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
@@ -41,9 +51,8 @@
     </div>
     <div>
       <div class="operator">
-        <a-button type="primary" ghost @click="add">出库</a-button>
-        <a-button type="primary" @click="download">导出</a-button>
-<!--        <a-button @click="batchDelete">删除</a-button>-->
+        <a-button type="primary" ghost @click="add">申请物品</a-button>
+        <a-button @click="batchDelete">删除</a-button>
       </div>
       <!-- 表格区域 -->
       <a-table ref="TableInfo"
@@ -55,69 +64,64 @@
                :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
                :scroll="{ x: 900 }"
                @change="handleTableChange">
-        <template slot="titleShow" slot-scope="text, record">
+        <template slot="numShow" slot-scope="text, record">
           <template>
-            <a-badge status="processing"/>
-            <a-tooltip>
-              <template slot="title">
-                {{ record.title }}
-              </template>
-              {{ record.title.slice(0, 8) }} ...
-            </a-tooltip>
-          </template>
-        </template>
-        <template slot="contentShow" slot-scope="text, record">
-          <template>
-            <a-tooltip>
-              <template slot="title">
-                {{ record.content }}
-              </template>
-              {{ record.content.slice(0, 30) }} ...
-            </a-tooltip>
+            <a-badge v-if="record.step == 0" status="processing"/>
+            <a-badge v-if="record.step == 1" status="success"/>
+            {{ record.num }}
           </template>
         </template>
         <template slot="operation" slot-scope="text, record">
-          <a-icon type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修 改"></a-icon>
+          <a-icon type="stop" v-if="record.step == 0" @click="stop(record)" title="中 止" style="margin-right: 15px"></a-icon>
+          <a-icon type="reconciliation" @click="view(record)" title="查 看" style="margin-right: 15px"></a-icon>
+          <a-icon type="download" @click="downLoad(record)" title="下 载" style="margin-right: 15px"></a-icon>
         </template>
       </a-table>
     </div>
-    <stock-out
-      @close="handleStockoutClose"
-      @success="handleStockoutSuccess"
-      :stockoutData="stockout.data"
-      :stockoutVisiable="stockout.visiable">
-    </stock-out>
+    <request-add
+      v-if="requestAdd.visiable"
+      @close="handlerequestAddClose"
+      @success="handlerequestAddSuccess"
+      :requestAddVisiable="requestAdd.visiable">
+    </request-add>
+    <request-view
+      @close="handlerequestViewClose"
+      :requestShow="requestView.visiable"
+      :requestData="requestView.data">
+    </request-view>
   </a-card>
 </template>
 
 <script>
 import RangeDate from '@/components/datetime/RangeDate'
 import {mapState} from 'vuex'
-import StockOut from './StockOut'
 import moment from 'moment'
 import { newSpread, floatForm, floatReset, saveExcel } from '@/utils/spreadJS'
+import RequestAdd from './RepairAdd.vue'
+import RequestView from './RepairView.vue'
 moment.locale('zh-cn')
-
 export default {
-  name: 'Stock',
-  components: {StockOut, RangeDate},
+  name: 'request',
+  components: {RequestView, RequestAdd, RangeDate},
   data () {
     return {
-      advanced: false,
-      stockout: {
-        visiable: false,
-        data: null
+      requestAdd: {
+        visiable: false
       },
       requestEdit: {
         visiable: false
       },
+      requestView: {
+        visiable: false,
+        data: null
+      },
+      advanced: false,
       queryParams: {},
       filteredInfo: null,
       sortedInfo: null,
       paginationInfo: null,
       dataSource: [],
       selectedRowKeys: [],
-      selectedRows: [],
       loading: false,
       pagination: {
         pageSizeOptions: ['10', '20', '30', '40', '100'],
@@ -127,7 +131,10 @@ export default {
         showSizeChanger: true,
         showTotal: (total, range) => `显示 ${range[0]} ~ ${range[1]} 条记录，共 ${total} 条记录`
       },
-      consumableType: []
+      userList: [],
+      fileList: [],
+      previewVisible: false,
+      previewImage: ''
     }
   },
   computed: {
@@ -136,11 +143,18 @@ export default {
     }),
     columns () {
       return [{
-        title: '物品名称',
+        title: '申请单号',
+        dataIndex: 'num',
+        scopedSlots: {customRender: 'numShow'}
+      }, {
+        title: '申请人',
         dataIndex: 'name'
       }, {
-        title: '型号',
-        dataIndex: 'type',
+        title: '申请说明',
+        dataIndex: 'content'
+      }, {
+        title: '采购小组',
+        dataIndex: 'team',
         customRender: (text, row, index) => {
           if (text !== null) {
             return text
@@ -149,73 +163,22 @@ export default {
           }
         }
       }, {
-        title: '物品数量',
-        dataIndex: 'amount',
+        title: '当前流程',
+        dataIndex: 'step',
         customRender: (text, row, index) => {
-          if (text !== null) {
-            return text
-          } else {
-            return '- -'
+          switch (text) {
+            case 0:
+              return <a-tag color="blue">等待审核</a-tag>
+            case 1:
+              return <a-tag color="green">审核通过</a-tag>
+            case 2:
+              return <a-tag color="red">驳回</a-tag>
+            default:
+              return '- -'
           }
         }
       }, {
-        title: '单位',
-        dataIndex: 'unit',
-        customRender: (text, row, index) => {
-          if (text !== null) {
-            return text
-          } else {
-            return '- -'
-          }
-        }
-      }, {
-        title: '单价',
-        dataIndex: 'price',
-        customRender: (text, row, index) => {
-          if (text !== null) {
-            return '￥' + text.toFixed(2)
-          } else {
-            return '- -'
-          }
-        }
-      }, {
-        title: '总价',
-        dataIndex: 'allPrice',
-        customRender: (text, row, index) => {
-          return '￥' + (row.price * row.amount).toFixed(2)
-        }
-      }, {
-        title: '物品类型',
-        dataIndex: 'consumableType',
-        customRender: (text, row, index) => {
-          if (text !== null) {
-            return <a-tag>{text}</a-tag>
-          } else {
-            return '- -'
-          }
-        }
-      }, {
-        title: '所属库房',
-        dataIndex: 'stockName',
-        customRender: (text, row, index) => {
-          if (text !== null) {
-            return text
-          } else {
-            return '- -'
-          }
-        }
-      }, {
-        title: '备注',
-        dataIndex: 'content',
-        customRender: (text, row, index) => {
-          if (text !== null) {
-            return text
-          } else {
-            return '- -'
-          }
-        }
-      }, {
-        title: '入库时间',
+        title: '申请时间',
         dataIndex: 'createDate',
         customRender: (text, row, index) => {
           if (text !== null) {
@@ -224,67 +187,80 @@ export default {
             return '- -'
           }
         }
+      }, {
+        title: '操作',
+        dataIndex: 'operation',
+        scopedSlots: {customRender: 'operation'}
       }]
     }
   },
   mounted () {
     this.fetch()
-    this.getConsumableType()
   },
   methods: {
-    download () {
+    downLoad (row) {
       this.$message.loading('正在生成', 0)
-      this.$get('/cos/stock-info/list').then((r) => {
+      this.$get('/cos/goods-belong/getGoodsByNum', { num: row.num }).then((r) => {
         let newData = []
         r.data.data.forEach((item, index) => {
-          newData.push([item.name, item.type !== null ? item.type : '- -', item.amount !== null ? item.amount : '- -', item.unit, item.price, item.consumableType, item.content, item.createDate])
+          newData.push([item.name, item.type !== null ? item.type : '- -', item.amount, row.createDate, ''])
         })
-        let spread = newSpread('stock')
-        spread = floatForm(spread, 'stock', newData)
-        saveExcel(spread, '库房物品.xlsx')
-        floatReset(spread, 'stock', newData.length)
+        let spread = newSpread('claimForm')
+        spread = floatForm(spread, 'claimForm', newData)
+        saveExcel(spread, '申领单.xlsx')
+        floatReset(spread, 'claimForm', newData.length)
         this.$message.destroy()
       })
     },
-    getConsumableType () {
-      this.$get('/cos/consumable-type/list').then((r) => {
-        this.consumableType = r.data.data
-      })
+    add () {
+      this.requestAdd.visiable = true
     },
-    onSelectChange (selectedRowKeys, selectedRows) {
-      selectedRows.forEach(item => {
-        if (item.amount === 0) {
-          this.$message.warning('该物品没有库存！')
-          return false
+    handlerequestAddClose () {
+      this.requestAdd.visiable = false
+    },
+    handlerequestAddSuccess () {
+      this.requestAdd.visiable = false
+      this.$message.success('新增物品申请成功')
+      this.search()
+    },
+    edit (record) {
+      this.$refs.requestEdit.setFormValues(record)
+      this.requestEdit.visiable = true
+    },
+    handlerequestEditClose () {
+      this.requestEdit.visiable = false
+    },
+    handlerequestEditSuccess () {
+      this.requestEdit.visiable = false
+      this.$message.success('修改物品申请成功')
+      this.search()
+    },
+    stop (row) {
+      let that = this
+      this.$confirm({
+        title: '确定中止当前采购申请?',
+        content: '当您点击确定按钮后，这些采购申请将会被彻底删除',
+        centered: true,
+        onOk () {
+          that.$delete('/cos/goods-request/' + row.id).then(() => {
+            that.$message.success('中止成功')
+            that.search()
+          })
         }
       })
+    },
+    view (row) {
+      this.requestView.data = row
+      this.requestView.visiable = true
+    },
+    handlerequestViewClose () {
+      this.requestView.visiable = false
+    },
+    onSelectChange (selectedRowKeys) {
       this.selectedRowKeys = selectedRowKeys
-      this.selectedRows = selectedRows
     },
     toggleAdvanced () {
       this.advanced = !this.advanced
-    },
-    add () {
-      if (!this.selectedRowKeys.length) {
-        this.$message.warning('请选择需要出库的物品')
-        return
-      }
-      let goods = this.selectedRows
-      goods.forEach(item => {
-        item.max = item.amount
-      })
-      this.stockout.data = JSON.parse(JSON.stringify(goods))
-      this.stockout.visiable = true
-    },
-    handleStockoutClose () {
-      this.stockout.visiable = false
-    },
-    handleStockoutSuccess () {
-      this.stockout.visiable = false
-      this.selectedRows = []
-      this.selectedRowKeys = []
-      this.$message.success('出库成功')
-      this.search()
     },
     handleDeptChange (value) {
       this.queryParams.deptId = value || ''
@@ -301,16 +277,14 @@ export default {
         centered: true,
         onOk () {
           let ids = that.selectedRowKeys.join(',')
-          that.$delete('/cos/request-type/' + ids).then(() => {
+          that.$delete('/cos/goods-request/' + ids).then(() => {
             that.$message.success('删除成功')
             that.selectedRowKeys = []
-            that.selectedRows = []
             that.search()
           })
         },
         onCancel () {
           that.selectedRowKeys = []
-          that.selectedRows = []
         }
       })
     },
@@ -373,10 +347,11 @@ export default {
         params.size = this.pagination.defaultPageSize
         params.current = this.pagination.defaultCurrent
       }
-      if (params.typeId === undefined) {
-        delete params.typeId
+      params.userId = this.currentUser.userId
+      if (params.step === undefined) {
+        delete params.step
       }
-      this.$get('/cos/stock-info/page', {
+      this.$get('/cos/goods-request/page', {
         ...params
       }).then((r) => {
         let data = r.data.data

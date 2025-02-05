@@ -8,7 +8,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="入库单号"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.num"/>
               </a-form-item>
@@ -16,7 +16,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="保管人"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.custodian"/>
               </a-form-item>
@@ -24,7 +24,7 @@
             <a-col :md="6" :sm="24">
               <a-form-item
                 label="入库人"
-                计量单位:labelCol="{span: 5}"
+                :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.putUser"/>
               </a-form-item>

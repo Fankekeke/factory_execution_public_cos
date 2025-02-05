@@ -24,7 +24,7 @@ public class StockGoodsPutController {
     private final IStockGoodsPutService stockGoodsPutService;
 
     /**
-     * 分页获取物资商品库房信息
+     * 分页获取物资商品库房信息樊安
      *
      * @param page           分页对象
      * @param stockGoodsPut 物资商品库房信息

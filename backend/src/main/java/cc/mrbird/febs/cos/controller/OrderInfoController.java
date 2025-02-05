@@ -55,6 +55,7 @@ public class OrderInfoController {
     @PostMapping
     public R save(OrderInfo orderInfo) {
         orderInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
+        orderInfo.setCode("OD-" + System.currentTimeMillis());
         return R.ok(orderInfoService.save(orderInfo));
     }
 

@@ -55,6 +55,7 @@ public class ProductionProcessInfoController {
     @PostMapping
     public R save(ProductionProcessInfo productionProcessInfo) {
         productionProcessInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
+        productionProcessInfo.setCode("PCS-" + System.currentTimeMillis());
         return R.ok(productionProcessInfoService.save(productionProcessInfo));
     }
 

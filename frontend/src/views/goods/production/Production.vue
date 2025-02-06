@@ -141,10 +141,10 @@ export default {
     }),
     columns () {
       return [{
-        title: '单位编号',
+        title: '流程单号',
         dataIndex: 'code'
       }, {
-        title: '单位名称',
+        title: '生产名称',
         dataIndex: 'name'
       }, {
         title: '创建时间',

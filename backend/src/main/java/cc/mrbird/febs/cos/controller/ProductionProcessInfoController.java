@@ -26,13 +26,24 @@ public class ProductionProcessInfoController {
     /**
      * 分页获取生产流程信息
      *
-     * @param page        分页对象
+     * @param page                  分页对象
      * @param productionProcessInfo 生产流程信息
      * @return 结果
      */
     @GetMapping("/page")
     public R page(Page<ProductionProcessInfo> page, ProductionProcessInfo productionProcessInfo) {
         return R.ok(productionProcessInfoService.queryProductionProcessPage(page, productionProcessInfo));
+    }
+
+    /**
+     * 获取生产流程信息详情
+     *
+     * @param id 主键
+     * @return 结果
+     */
+    @GetMapping("/queryProcessDetail/{id}")
+    public R queryProcessDetail(@PathVariable("id") Integer id) {
+        return R.ok(productionProcessInfoService.queryProcessDetail(id));
     }
 
     /**

@@ -1,5 +1,6 @@
 package cc.mrbird.febs.cos.service;
 
+import cc.mrbird.febs.cos.entity.ProcessDetail;
 import cc.mrbird.febs.cos.entity.ProductionProcessInfo;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -21,4 +22,12 @@ public interface IProductionProcessInfoService extends IService<ProductionProces
      * @return 结果
      */
     List<LinkedHashMap<String, Object>> queryProductionProcessPage(Page<ProductionProcessInfo> page, ProductionProcessInfo productionProcessInfo);
+
+    /**
+     * 获取生产流程信息详情
+     *
+     * @param id 主键
+     * @return 结果
+     */
+    List<ProcessDetail> queryProcessDetail(Integer id);
 }

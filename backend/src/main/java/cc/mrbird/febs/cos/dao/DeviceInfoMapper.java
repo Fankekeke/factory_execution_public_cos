@@ -2,6 +2,7 @@ package cc.mrbird.febs.cos.dao;
 
 import cc.mrbird.febs.cos.entity.DeviceInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,5 +21,5 @@ public interface DeviceInfoMapper extends BaseMapper<DeviceInfo> {
      * @param deviceInfo 设备信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryDeviceList(Page<DeviceInfo> page, @Param("deviceInfo") DeviceInfo deviceInfo);
+    IPage<LinkedHashMap<String, Object>> queryDeviceList(Page<DeviceInfo> page, @Param("deviceInfo") DeviceInfo deviceInfo);
 }

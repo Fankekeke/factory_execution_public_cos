@@ -3,6 +3,7 @@ package cc.mrbird.febs.cos.service.impl;
 import cc.mrbird.febs.cos.entity.DeviceInfo;
 import cc.mrbird.febs.cos.dao.DeviceInfoMapper;
 import cc.mrbird.febs.cos.service.IDeviceInfoService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class DeviceInfoServiceImpl extends ServiceImpl<DeviceInfoMapper, DeviceI
      * @return 结果
      */
     @Override
-    public List<LinkedHashMap<String, Object>> queryDeviceList(Page<DeviceInfo> page, DeviceInfo deviceInfo) {
+    public IPage<LinkedHashMap<String, Object>> queryDeviceList(Page<DeviceInfo> page, DeviceInfo deviceInfo) {
         return baseMapper.queryDeviceList(page, deviceInfo);
     }
 }

@@ -1,6 +1,7 @@
 package cc.mrbird.febs.cos.service;
 
 import cc.mrbird.febs.cos.entity.DeviceInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
@@ -20,5 +21,5 @@ public interface IDeviceInfoService extends IService<DeviceInfo> {
      * @param deviceInfo 设备信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryDeviceList(Page<DeviceInfo> page, DeviceInfo deviceInfo);
+    IPage<LinkedHashMap<String, Object>> queryDeviceList(Page<DeviceInfo> page, DeviceInfo deviceInfo);
 }

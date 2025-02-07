@@ -130,7 +130,14 @@ export default {
     columns () {
       return [{
         title: '设备编号',
-        dataIndex: 'code'
+        dataIndex: 'code',
+        customRender: (text, row, index) => {
+          if (text !== null) {
+            return text
+          } else {
+            return '- -'
+          }
+        }
       }, {
         title: '设备名称',
         dataIndex: 'deviceName'

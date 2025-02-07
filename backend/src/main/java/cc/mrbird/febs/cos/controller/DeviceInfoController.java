@@ -56,6 +56,7 @@ public class DeviceInfoController {
      */
     @PostMapping
     public R save(DeviceInfo deviceInfo) {
+        deviceInfo.setCode("DE-" + System.currentTimeMillis());
         deviceInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
         return R.ok(deviceInfoService.save(deviceInfo));
     }

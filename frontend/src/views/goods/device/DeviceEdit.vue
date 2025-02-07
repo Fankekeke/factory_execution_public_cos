@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model="show" title="修改生产设备" @cancel="onClose" :width="400">
+  <a-modal v-model="show" title="修改生产设备" @cancel="onClose" :width="650">
     <template slot="footer">
       <a-button key="back" @click="onClose">
         取消

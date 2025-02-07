@@ -173,7 +173,7 @@ export default {
             values.userId = this.currentUser.userId
             values.goods = JSON.stringify(this.dataList)
             this.loading = true
-            this.$post('/cos/goods-request', {
+            this.$post('/cos/repair-info', {
               ...values
             }).then((r) => {
               this.reset()

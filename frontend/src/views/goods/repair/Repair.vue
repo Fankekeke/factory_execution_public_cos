@@ -351,7 +351,7 @@ export default {
       if (params.step === undefined) {
         delete params.step
       }
-      this.$get('/cos/goods-request/page', {
+      this.$get('/cos/repair-info/page', {
         ...params
       }).then((r) => {
         let data = r.data.data

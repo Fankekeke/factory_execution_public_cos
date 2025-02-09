@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model="show" title="新增生产流程" @cancel="onClose" :width="400">
+  <a-modal v-model="show" title="新增生产流程" @cancel="onClose" :width="500">
     <template slot="footer">
       <a-button key="back" @click="onClose">
         取消
@@ -15,6 +15,14 @@
             <a-input v-decorator="[
             'name',
             { rules: [{ required: true, message: '请输入名称!' }] }
+            ]"/>
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item label='生产备注' v-bind="formItemLayout">
+            <a-textarea :rows="4" v-decorator="[
+            'content',
+             { rules: [{ required: true, message: '请输入生产备注!' }] }
             ]"/>
           </a-form-item>
         </a-col>
@@ -99,7 +107,7 @@ export default {
         if (!err) {
           values.publisher = this.currentUser.userId
           this.loading = true
-          this.$post('/cos/unit-info', {
+          this.$post('/cos/production-process-info', {
             ...values
           }).then((r) => {
             this.reset()

@@ -2,9 +2,13 @@ package cc.mrbird.febs.cos.controller;
 
 
 import cc.mrbird.febs.common.utils.R;
+import cc.mrbird.febs.cos.entity.ProcessInfo;
 import cc.mrbird.febs.cos.entity.ProductionProcessInfo;
+import cc.mrbird.febs.cos.service.IProcessInfoService;
 import cc.mrbird.febs.cos.service.IProductionProcessInfoService;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,8 @@ import java.util.List;
 public class ProductionProcessInfoController {
 
     private final IProductionProcessInfoService productionProcessInfoService;
+
+    private final IProcessInfoService processInfoService;
 
     /**
      * 分页获取生产流程信息
@@ -67,6 +73,14 @@ public class ProductionProcessInfoController {
     public R save(ProductionProcessInfo productionProcessInfo) {
         productionProcessInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
         productionProcessInfo.setCode("PCS-" + System.currentTimeMillis());
+        productionProcessInfo.setStatus("0");
+        // 获取流程步骤
+        List<ProcessInfo> processList = processInfoService.list(Wrappers.<ProcessInfo>lambdaQuery().orderByAsc(ProcessInfo::getStepIndex));
+        if (CollUtil.isEmpty(processList)) {
+            return R.error("流程步骤为空，请先添加流程步骤");
+        }
+        productionProcessInfo.setStepNum(processList.size());
+        productionProcessInfo.setCurrentStep(processList.get(0).getStepIndex());
         return R.ok(productionProcessInfoService.save(productionProcessInfo));
     }
 

@@ -1,6 +1,7 @@
 package cc.mrbird.febs.cos.service;
 
 import cc.mrbird.febs.cos.entity.StockGoodsPut;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
@@ -20,5 +21,5 @@ public interface IStockGoodsPutService extends IService<StockGoodsPut> {
      * @param stockGoodsPut 物资商品库房信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryStockGoodsPutPage(Page<StockGoodsPut> page, StockGoodsPut stockGoodsPut);
+    IPage<LinkedHashMap<String, Object>> queryStockGoodsPutPage(Page<StockGoodsPut> page, StockGoodsPut stockGoodsPut);
 }

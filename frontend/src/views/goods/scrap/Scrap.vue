@@ -7,7 +7,7 @@
           <div :class="advanced ? null: 'fold'">
             <a-col :md="6" :sm="24">
               <a-form-item
-                label="申请单号"
+                label="单号"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.num"/>
@@ -15,30 +15,10 @@
             </a-col>
             <a-col :md="6" :sm="24">
               <a-form-item
-                label="申请人"
+                label="报废主题"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
-                <a-input v-model="queryParams.name"/>
-              </a-form-item>
-            </a-col>
-            <a-col :md="6" :sm="24">
-              <a-form-item
-                label="采购小组"
-                :labelCol="{span: 5}"
-                :wrapperCol="{span: 18, offset: 1}">
-                <a-input v-model="queryParams.team"/>
-              </a-form-item>
-            </a-col>
-            <a-col :md="6" :sm="24">
-              <a-form-item
-                label="审核状态"
-                :labelCol="{span: 5}"
-                :wrapperCol="{span: 18, offset: 1}">
-                <a-select v-model="queryParams.step" allowClear>
-                  <a-select-option value="0">正在审核</a-select-option>
-                  <a-select-option value="1">审核成功</a-select-option>
-                  <a-select-option value="2">驳回</a-select-option>
-                </a-select>
+                <a-input v-model="queryParams.theme"/>
               </a-form-item>
             </a-col>
           </div>
@@ -220,7 +200,7 @@ export default {
     },
     handlerequestAddSuccess () {
       this.requestAdd.visiable = false
-      this.$message.success('新增物品申请成功')
+      this.$message.success('新增核销报废成功')
       this.search()
     },
     edit (record) {
@@ -232,7 +212,7 @@ export default {
     },
     handlerequestEditSuccess () {
       this.requestEdit.visiable = false
-      this.$message.success('修改物品申请成功')
+      this.$message.success('修改核销报废成功')
       this.search()
     },
     stop (row) {
@@ -277,7 +257,7 @@ export default {
         centered: true,
         onOk () {
           let ids = that.selectedRowKeys.join(',')
-          that.$delete('/cos/goods-request/' + ids).then(() => {
+          that.$delete('/cos/scrap-info/' + ids).then(() => {
             that.$message.success('删除成功')
             that.selectedRowKeys = []
             that.search()
@@ -351,7 +331,7 @@ export default {
       if (params.step === undefined) {
         delete params.step
       }
-      this.$get('/cos/goods-request/page', {
+      this.$get('/cos/scrap-info/page', {
         ...params
       }).then((r) => {
         let data = r.data.data

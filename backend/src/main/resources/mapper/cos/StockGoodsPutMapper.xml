@@ -15,14 +15,14 @@
         FROM
         stock_goods_put sp
         WHERE 1 = 1
-        <if test="stockPut.num != null and stockPut.num != ''">
-            AND sp.num LIKE CONCAT('%',#{stockPut.num},'%')
+        <if test="stockGoodsPut.num != null and stockGoodsPut.num != ''">
+            AND sp.num LIKE CONCAT('%',#{stockGoodsPut.num},'%')
         </if>
-        <if test="stockPut.putUser != null and stockPut.putUser != ''">
-            AND sp.put_user LIKE CONCAT('%',#{stockPut.putUser},'%')
+        <if test="stockGoodsPut.putUser != null and stockGoodsPut.putUser != ''">
+            AND sp.put_user LIKE CONCAT('%',#{stockGoodsPut.putUser},'%')
         </if>
-        <if test="stockPut.custodian != null and stockPut.custodian != ''">
-            AND sp.custodian LIKE CONCAT('%',#{stockPut.custodian},'%')
+        <if test="stockGoodsPut.custodian != null and stockGoodsPut.custodian != ''">
+            AND sp.custodian LIKE CONCAT('%',#{stockGoodsPut.custodian},'%')
         </if>
         ORDER BY
         sp.create_date DESC

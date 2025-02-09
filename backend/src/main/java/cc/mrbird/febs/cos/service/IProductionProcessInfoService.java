@@ -2,6 +2,7 @@ package cc.mrbird.febs.cos.service;
 
 import cc.mrbird.febs.cos.entity.ProcessDetail;
 import cc.mrbird.febs.cos.entity.ProductionProcessInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
@@ -21,7 +22,7 @@ public interface IProductionProcessInfoService extends IService<ProductionProces
      * @param productionProcessInfo 生产流程信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryProductionProcessPage(Page<ProductionProcessInfo> page, ProductionProcessInfo productionProcessInfo);
+    IPage<LinkedHashMap<String, Object>> queryProductionProcessPage(Page<ProductionProcessInfo> page, ProductionProcessInfo productionProcessInfo);
 
     /**
      * 获取生产流程信息详情

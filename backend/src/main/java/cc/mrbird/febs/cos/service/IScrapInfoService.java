@@ -1,6 +1,7 @@
 package cc.mrbird.febs.cos.service;
 
 import cc.mrbird.febs.cos.entity.ScrapInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
@@ -20,5 +21,5 @@ public interface IScrapInfoService extends IService<ScrapInfo> {
      * @param scrapInfo 物资报废信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryScrapPage(Page<ScrapInfo> page, ScrapInfo scrapInfo);
+    IPage<LinkedHashMap<String, Object>> queryScrapPage(Page<ScrapInfo> page, ScrapInfo scrapInfo);
 }

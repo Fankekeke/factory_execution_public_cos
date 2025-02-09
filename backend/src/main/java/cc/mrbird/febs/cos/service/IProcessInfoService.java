@@ -1,6 +1,7 @@
 package cc.mrbird.febs.cos.service;
 
 import cc.mrbird.febs.cos.entity.ProcessInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
@@ -20,5 +21,5 @@ public interface IProcessInfoService extends IService<ProcessInfo> {
      * @param processInfo 流程管理信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryProcessPage(Page<ProcessInfo> page, ProcessInfo processInfo);
+    IPage<LinkedHashMap<String, Object>> queryProcessPage(Page<ProcessInfo> page, ProcessInfo processInfo);
 }

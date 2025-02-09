@@ -5,14 +5,16 @@
     <!-- 分页获取流程管理信息 -->
     <select id="queryProcessPage" resultType="java.util.LinkedHashMap">
         select
-        id,
-        name,
-        content,
-        step_index,
-        create_date,
-        role_id
+        pi.id,
+        pi.name,
+        pi.content,
+        pi.step_index,
+        pi.create_date,
+        pi.role_id,
+        r.role_name
         from
-        process_info
+        process_info pi
+        left join t_role r on pi.role_id = r.role_id
         where
         1 = 1
         <if test="processInfo.name != null and processInfo.name != ''">

@@ -3,6 +3,7 @@ package cc.mrbird.febs.cos.service.impl;
 import cc.mrbird.febs.cos.entity.ProcessInfo;
 import cc.mrbird.febs.cos.dao.ProcessInfoMapper;
 import cc.mrbird.febs.cos.service.IProcessInfoService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class ProcessInfoServiceImpl extends ServiceImpl<ProcessInfoMapper, Proce
      * @return 结果
      */
     @Override
-    public List<LinkedHashMap<String, Object>> queryProcessPage(Page<ProcessInfo> page, ProcessInfo processInfo) {
+    public IPage<LinkedHashMap<String, Object>> queryProcessPage(Page<ProcessInfo> page, ProcessInfo processInfo) {
         return baseMapper.queryProcessPage(page, processInfo);
     }
 }

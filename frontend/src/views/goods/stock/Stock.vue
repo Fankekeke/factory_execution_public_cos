@@ -234,7 +234,7 @@ export default {
   methods: {
     download () {
       this.$message.loading('正在生成', 0)
-      this.$get('/cos/stock-info/list').then((r) => {
+      this.$get('/cos/stock-goods-info/list').then((r) => {
         let newData = []
         r.data.data.forEach((item, index) => {
           newData.push([item.name, item.type !== null ? item.type : '- -', item.amount !== null ? item.amount : '- -', item.unit, item.price, item.consumableType, item.content, item.createDate])
@@ -376,7 +376,7 @@ export default {
       if (params.typeId === undefined) {
         delete params.typeId
       }
-      this.$get('/cos/stock-info/page', {
+      this.$get('/cos/stock-goods-info/page', {
         ...params
       }).then((r) => {
         let data = r.data.data

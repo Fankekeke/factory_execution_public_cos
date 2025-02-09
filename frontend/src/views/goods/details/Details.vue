@@ -306,7 +306,7 @@ export default {
       if (params.typeId === undefined) {
         delete params.typeId
       }
-      this.$get('/cos/stock-info/detail/page', {
+      this.$get('/cos/stock-goods-info/detail/page', {
         ...params
       }).then((r) => {
         let data = r.data.data

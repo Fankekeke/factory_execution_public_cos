@@ -3,6 +3,7 @@ package cc.mrbird.febs.cos.controller;
 
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.StockGoodsInfo;
+import cc.mrbird.febs.cos.entity.StockInfo;
 import cc.mrbird.febs.cos.service.IStockGoodsInfoService;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +35,43 @@ public class StockGoodsInfoController {
     @GetMapping("/page")
     public R page(Page<StockGoodsInfo> page, StockGoodsInfo stockGoodsInfo) {
         return R.ok(stockGoodsInfoService.queryStockGoodsPage(page, stockGoodsInfo));
+    }
+
+    /**
+     * 分页获取物品出入库详情
+     *
+     * @param page
+     * @param stockInfo
+     * @return
+     */
+    @GetMapping("/detail/page")
+    public R stockInfoDetailPage(Page page, StockGoodsInfo stockInfo) {
+        return R.ok(stockGoodsInfoService.stockInfoDetailPage(page, stockInfo));
+    }
+
+    /**
+     * 分页获取库房信息
+     *
+     * @param stockInfo
+     * @return
+     */
+    @GetMapping("/list")
+    public R page(StockGoodsInfo stockInfo) {
+        return R.ok(stockGoodsInfoService.stockInfoByList(stockInfo));
+    }
+
+    /**
+     * 入库
+     *
+     * @param goods
+     * @param custodian
+     * @param putUser
+     * @param content
+     * @return
+     */
+    @PostMapping("/put")
+    public R put(String goods, String custodian, String putUser, String content, BigDecimal price) {
+        return R.ok(stockGoodsInfoService.stockPut(goods, custodian, putUser, content, price));
     }
 
     /**

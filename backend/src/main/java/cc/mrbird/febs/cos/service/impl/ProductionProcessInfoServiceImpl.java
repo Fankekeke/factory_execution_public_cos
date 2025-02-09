@@ -9,6 +9,7 @@ import cc.mrbird.febs.cos.service.IProcessDetailService;
 import cc.mrbird.febs.cos.service.IProductionProcessInfoService;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -41,7 +42,7 @@ public class ProductionProcessInfoServiceImpl extends ServiceImpl<ProductionProc
      * @return 结果
      */
     @Override
-    public List<LinkedHashMap<String, Object>> queryProductionProcessPage(Page<ProductionProcessInfo> page, ProductionProcessInfo productionProcessInfo) {
+    public IPage<LinkedHashMap<String, Object>> queryProductionProcessPage(Page<ProductionProcessInfo> page, ProductionProcessInfo productionProcessInfo) {
         return baseMapper.queryProductionProcessPage(page, productionProcessInfo);
     }
 

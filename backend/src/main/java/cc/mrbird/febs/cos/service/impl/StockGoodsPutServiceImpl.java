@@ -3,6 +3,7 @@ package cc.mrbird.febs.cos.service.impl;
 import cc.mrbird.febs.cos.entity.StockGoodsPut;
 import cc.mrbird.febs.cos.dao.StockGoodsPutMapper;
 import cc.mrbird.febs.cos.service.IStockGoodsPutService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class StockGoodsPutServiceImpl extends ServiceImpl<StockGoodsPutMapper, S
      * @return 结果
      */
     @Override
-    public List<LinkedHashMap<String, Object>> queryStockGoodsPutPage(Page<StockGoodsPut> page, StockGoodsPut stockGoodsPut) {
+    public IPage<LinkedHashMap<String, Object>> queryStockGoodsPutPage(Page<StockGoodsPut> page, StockGoodsPut stockGoodsPut) {
         return baseMapper.queryStockGoodsPutPage(page, stockGoodsPut);
     }
 }

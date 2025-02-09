@@ -2,6 +2,7 @@ package cc.mrbird.febs.cos.dao;
 
 import cc.mrbird.febs.cos.entity.RepairInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,5 +21,5 @@ public interface RepairInfoMapper extends BaseMapper<RepairInfo> {
      * @param repairInfo 维保信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryRepairPage(Page<RepairInfo> page, @Param("repairInfo") RepairInfo repairInfo);
+    IPage<LinkedHashMap<String, Object>> queryRepairPage(Page<RepairInfo> page, @Param("repairInfo") RepairInfo repairInfo);
 }

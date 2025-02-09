@@ -1,6 +1,7 @@
 package cc.mrbird.febs.cos.service;
 
 import cc.mrbird.febs.cos.entity.RepairInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
@@ -20,5 +21,5 @@ public interface IRepairInfoService extends IService<RepairInfo> {
      * @param repairInfo 维保信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryRepairPage(Page<RepairInfo> page, RepairInfo repairInfo);
+    IPage<LinkedHashMap<String, Object>> queryRepairPage(Page<RepairInfo> page, RepairInfo repairInfo);
 }

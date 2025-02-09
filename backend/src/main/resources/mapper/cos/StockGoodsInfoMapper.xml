@@ -37,6 +37,67 @@
         si.create_date DESC
     </select>
 
+    <select id="stockInfoByList" resultType="java.util.LinkedHashMap">
+        SELECT
+        si.id,
+        si.name,
+        si.type,
+        si.type_id AS typeId,
+        si.amount,
+        si.unit,
+        si.content,
+        si.price,
+        si.create_date AS createDate,
+        ct.`name` AS consumableType
+        FROM
+        stock_goods_info si
+        LEFT JOIN consumable_type ct ON ( ct.id = si.type_id )
+        WHERE
+        1 = 1
+        <if test="stockGoodsInfo.name != null and stockGoodsInfo.name != ''">
+            AND si.name LIKE CONCAT('%',#{stockGoodsInfo.name},'%')
+        </if>
+        <if test="stockGoodsInfo.type != null and stockGoodsInfo.type != ''">
+            AND si.type LIKE CONCAT('%',#{stockGoodsInfo.type},'%')
+        </if>
+        <if test="stockGoodsInfo.typeId != null">
+            AND si.type_id = #{stockGoodsInfo.typeId}
+        </if>
+        AND si.is_in = 0
+    </select>
+
+    <!-- 分页获取物品出入库详情 -->
+    <select id="stockInfoDetailPage" resultType="java.util.LinkedHashMap">
+        SELECT
+        si.id,
+        si.name,
+        si.type_id AS typeId,
+        si.type,
+        si.amount,
+        si.unit,
+        si.content,
+        si.price,
+        si.create_date AS createDate,
+        si.is_in,
+        cy.`name` AS consumableName
+        FROM
+        stock_goods_info si
+        LEFT JOIN consumable_type cy ON (cy.id = si.type_id)
+        WHERE si.is_in != 0
+        <if test="stockGoodsInfo.name != null and stockGoodsInfo.name != ''">
+            AND si.name LIKE CONCAT('%',#{stockGoodsInfo.name},'%')
+        </if>
+        <if test="stockGoodsInfo.type != null and stockGoodsInfo.type != ''">
+            AND si.type LIKE CONCAT('%',#{stockGoodsInfo.type},'%')
+        </if>
+        <if test="stockGoodsInfo.typeId != null">
+            AND si.type_id = #{stockGoodsInfo.typeId}
+        </if>
+        <if test="stockGoodsInfo.isIn != null">
+            AND si.is_in = #{stockGoodsInfo.isIn}
+        </if>
+    </select>
+
     <select id="stockGoodsInfoByList" resultType="java.util.LinkedHashMap">
         SELECT
         si.id,

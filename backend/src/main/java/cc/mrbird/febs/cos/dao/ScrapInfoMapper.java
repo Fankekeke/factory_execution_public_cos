@@ -2,6 +2,7 @@ package cc.mrbird.febs.cos.dao;
 
 import cc.mrbird.febs.cos.entity.ScrapInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,5 +21,5 @@ public interface ScrapInfoMapper extends BaseMapper<ScrapInfo> {
      * @param scrapInfo 物资报废信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryScrapPage(Page<ScrapInfo> page, @Param("scrapInfo") ScrapInfo scrapInfo);
+    IPage<LinkedHashMap<String, Object>> queryScrapPage(Page<ScrapInfo> page, @Param("scrapInfo") ScrapInfo scrapInfo);
 }

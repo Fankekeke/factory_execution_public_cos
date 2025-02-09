@@ -1,6 +1,7 @@
 package cc.mrbird.febs.cos.dao;
 
 import cc.mrbird.febs.cos.entity.StockGoodsInfo;
+import cc.mrbird.febs.cos.entity.StockInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -21,7 +22,12 @@ public interface StockGoodsInfoMapper extends BaseMapper<StockGoodsInfo> {
      * @param stockGoodsInfo 物资商品库房信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryStockGoodsPage(Page<StockGoodsInfo> page, @Param("stockGoodsInfo") StockGoodsInfo stockGoodsInfo);
+    IPage<LinkedHashMap<String, Object>> queryStockGoodsPage(Page<StockGoodsInfo> page, @Param("stockGoodsInfo") StockGoodsInfo stockGoodsInfo);
+
+    // 分页获取物品出入库详情
+    IPage<LinkedHashMap<String, Object>> stockInfoDetailPage(Page page, @Param("stockGoodsInfo") StockGoodsInfo stockInfo);
+
+    List<LinkedHashMap<String, Object>> stockInfoByList(@Param("stockGoodsInfo") StockGoodsInfo stockInfo);
 
     List<LinkedHashMap<String, Object>> stockGoodsInfoByList(@Param("stockGoodsInfo") StockGoodsInfo stockGoodsInfo);
 

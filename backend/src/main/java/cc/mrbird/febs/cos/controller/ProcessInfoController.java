@@ -1,10 +1,12 @@
 package cc.mrbird.febs.cos.controller;
 
 
+import cc.mrbird.febs.common.exception.FebsException;
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.ProcessInfo;
 import cc.mrbird.febs.cos.service.IProcessInfoService;
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +55,12 @@ public class ProcessInfoController {
      * @return 结果
      */
     @PostMapping
-    public R save(ProcessInfo processInfo) {
+    public R save(ProcessInfo processInfo) throws FebsException {
         processInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
+        int count = processInfoService.count(Wrappers.<ProcessInfo>lambdaQuery().eq(ProcessInfo::getStepIndex, processInfo.getStepIndex()));
+        if (count > 0) {
+            throw new FebsException("当前步骤已存在，请修改步骤");
+        }
         return R.ok(processInfoService.save(processInfo));
     }
 

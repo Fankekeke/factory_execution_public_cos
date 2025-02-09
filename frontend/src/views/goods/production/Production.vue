@@ -147,6 +147,51 @@ export default {
         title: '生产名称',
         dataIndex: 'name'
       }, {
+        title: '总流程数量',
+        dataIndex: 'stepNum',
+        customRender: (text, row, index) => {
+          if (text !== null) {
+            return text
+          } else {
+            return '- -'
+          }
+        }
+      }, {
+        title: '当前流程',
+        dataIndex: 'currentStep',
+        customRender: (text, row, index) => {
+          if (text !== null) {
+            return text
+          } else {
+            return '- -'
+          }
+        }
+      }, {
+        title: '当前状态',
+        dataIndex: 'status',
+        customRender: (text, row, index) => {
+          switch (text) {
+            case '0':
+              return <a-tag color="red">未提交</a-tag>
+            case '1':
+              return <a-tag>已提交</a-tag>
+            case '2':
+              return <a-tag>返工</a-tag>
+            default:
+              return '- -'
+          }
+        }
+      }, {
+        title: '生产备注',
+        dataIndex: 'content',
+        customRender: (text, row, index) => {
+          if (text !== null) {
+            return text
+          } else {
+            return '- -'
+          }
+        }
+      }, {
         title: '创建时间',
         dataIndex: 'createDate',
         customRender: (text, row, index) => {
@@ -211,7 +256,7 @@ export default {
         centered: true,
         onOk () {
           let ids = that.selectedRowKeys.join(',')
-          that.$delete('/cos/unit-info/' + ids).then(() => {
+          that.$delete('/cos/production-process-info/' + ids).then(() => {
             that.$message.success('删除成功')
             that.selectedRowKeys = []
             that.search()
@@ -284,7 +329,7 @@ export default {
       if (params.status === undefined) {
         delete params.status
       }
-      this.$get('/cos/unit-info/page', {
+      this.$get('/cos/production-process-info/page', {
         ...params
       }).then((r) => {
         let data = r.data.data

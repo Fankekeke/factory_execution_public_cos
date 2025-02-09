@@ -20,7 +20,7 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label='流程ID' v-bind="formItemLayout">
-            <a-input-number v-decorator="[
+            <a-input-number style="width: 100%" v-decorator="[
             'stepIndex',
             { rules: [{ required: true, message: '请输入流程ID!' }] }
             ]" :min="1" :step="1"/>
@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     queryRoleList () {
-      this.$get('/queryRoleList').then((r) => {
+      this.$get('/role/queryRoleList').then((r) => {
         this.roleList = r.data.data
       })
     },
@@ -134,7 +134,7 @@ export default {
         if (!err) {
           values.publisher = this.currentUser.userId
           this.loading = true
-          this.$post('/cos/unit-info', {
+          this.$post('/cos/process-info', {
             ...values
           }).then((r) => {
             this.reset()

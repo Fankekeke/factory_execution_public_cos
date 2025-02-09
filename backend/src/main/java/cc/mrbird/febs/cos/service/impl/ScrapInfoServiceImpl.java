@@ -3,6 +3,7 @@ package cc.mrbird.febs.cos.service.impl;
 import cc.mrbird.febs.cos.entity.ScrapInfo;
 import cc.mrbird.febs.cos.dao.ScrapInfoMapper;
 import cc.mrbird.febs.cos.service.IScrapInfoService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class ScrapInfoServiceImpl extends ServiceImpl<ScrapInfoMapper, ScrapInfo
      * @return 结果
      */
     @Override
-    public List<LinkedHashMap<String, Object>> queryScrapPage(Page<ScrapInfo> page, ScrapInfo scrapInfo) {
+    public IPage<LinkedHashMap<String, Object>> queryScrapPage(Page<ScrapInfo> page, ScrapInfo scrapInfo) {
         return baseMapper.queryScrapPage(page, scrapInfo);
     }
 }

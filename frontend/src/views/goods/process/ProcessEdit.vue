@@ -20,7 +20,7 @@
         </a-col>
         <a-col :span="24">
           <a-form-item label='流程ID' v-bind="formItemLayout">
-            <a-input-number v-decorator="[
+            <a-input-number style="width: 100%" v-decorator="[
             'stepIndex',
             { rules: [{ required: true, message: '请输入流程ID!' }] }
             ]" :min="1" :step="1"/>
@@ -32,7 +32,7 @@
             'roleId',
             { rules: [{ required: true, message: '请输入操作人与审批人!' }] }
             ]" style="width: 100%" allowClear>
-              <a-select-option v-for="(item, index) in roleList" :value="item.roleId" :key="index">{{ item.roleName }}</a-select-option>
+              <a-select-option v-for="(item, index) in roleList" :value="item.roleId.toString()" :key="index">{{ item.roleName }}</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     queryRoleList () {
-      this.$get('/queryRoleList').then((r) => {
+      this.$get('/role//queryRoleList').then((r) => {
         this.roleList = r.data.data
       })
     },
@@ -134,6 +134,9 @@ export default {
           this.fileList = []
           this.imagesInit(unit['images'])
         }
+        if (key === 'roleId' && unit[key] !== null) {
+          unit[key] = unit[key].toString()
+        }
         if (fields.indexOf(key) !== -1) {
           this.form.getFieldDecorator(key)
           obj[key] = unit[key]
@@ -160,7 +163,7 @@ export default {
         values.images = images.length > 0 ? images.join(',') : null
         if (!err) {
           this.loading = true
-          this.$put('/cos/unit-info', {
+          this.$put('/cos/process-info', {
             ...values
           }).then((r) => {
             this.reset()

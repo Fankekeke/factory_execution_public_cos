@@ -2,6 +2,7 @@ package cc.mrbird.febs.cos.dao;
 
 import cc.mrbird.febs.cos.entity.ProductionProcessInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,5 +21,5 @@ public interface ProductionProcessInfoMapper extends BaseMapper<ProductionProces
      * @param productionProcessInfo 生产流程信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryProductionProcessPage(Page<ProductionProcessInfo> page, @Param("productionProcessInfo") ProductionProcessInfo productionProcessInfo);
+    IPage<LinkedHashMap<String, Object>> queryProductionProcessPage(Page<ProductionProcessInfo> page, @Param("productionProcessInfo") ProductionProcessInfo productionProcessInfo);
 }

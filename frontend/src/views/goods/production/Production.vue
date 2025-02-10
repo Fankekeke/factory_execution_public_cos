@@ -78,7 +78,8 @@
           </template>
         </template>
         <template slot="operation" slot-scope="text, record">
-          <a-icon type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修 改"></a-icon>
+          <a-icon type="reconciliation" @click="view(record)" title="查 看" style="margin-right: 15px"></a-icon>
+<!--          <a-icon type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修 改"></a-icon>-->
         </template>
       </a-table>
     </div>
@@ -94,6 +95,11 @@
       @success="handleunitEditSuccess"
       :unitEditVisiable="unitEdit.visiable">
     </unit-edit>
+    <rurchase-view
+      @close="handleRurchaseViewClose"
+      :rurchaseShow="rurchaseView.visiable"
+      :rurchaseData="rurchaseView.data">
+    </rurchase-view>
   </a-card>
 </template>
 
@@ -101,13 +107,14 @@
 import RangeDate from '@/components/datetime/RangeDate'
 import unitAdd from './ProductionAdd.vue'
 import unitEdit from './ProductionEdit.vue'
+import RurchaseView from './RurchaseView'
 import {mapState} from 'vuex'
 import moment from 'moment'
 moment.locale('zh-cn')
 
 export default {
   name: 'unit',
-  components: {unitAdd, unitEdit, RangeDate},
+  components: {unitAdd, unitEdit, RurchaseView, RangeDate},
   data () {
     return {
       advanced: false,
@@ -116,6 +123,10 @@ export default {
       },
       unitEdit: {
         visiable: false
+      },
+      rurchaseView: {
+        visiable: false,
+        data: null
       },
       queryParams: {},
       filteredInfo: null,
@@ -160,10 +171,19 @@ export default {
         title: '当前流程',
         dataIndex: 'currentStep',
         customRender: (text, row, index) => {
-          if (text !== null) {
-            return text
-          } else {
-            return '- -'
+          switch (text) {
+            case 1:
+              return <a-tag>清洗消毒</a-tag>
+            case 2:
+              return <a-tag>原材料整理</a-tag>
+            case 3:
+              return <a-tag>商品制作</a-tag>
+            case 4:
+              return <a-tag>商品打包</a-tag>
+            case 5:
+              return <a-tag>入库印刷</a-tag>
+            default:
+              return '- -'
           }
         }
       }, {
@@ -212,6 +232,13 @@ export default {
     this.fetch()
   },
   methods: {
+    view (row) {
+      this.rurchaseView.data = row
+      this.rurchaseView.visiable = true
+    },
+    handleRurchaseViewClose () {
+      this.rurchaseView.visiable = false
+    },
     onSelectChange (selectedRowKeys) {
       this.selectedRowKeys = selectedRowKeys
     },

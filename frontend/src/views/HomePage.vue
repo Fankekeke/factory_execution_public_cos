@@ -105,7 +105,7 @@
                 </a-form-item>
               </a-col>
               <a-col :span="12">
-                <a-form-item label='采购部门' v-bind="formItemLayout">
+                <a-form-item label='所属部门' v-bind="formItemLayout">
                   <a-input v-decorator="[
                 'team',
                 { rules: [{ required: true, message: '请输入采购小组!' }] }

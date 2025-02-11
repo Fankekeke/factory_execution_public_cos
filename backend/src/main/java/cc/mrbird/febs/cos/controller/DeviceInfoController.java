@@ -60,6 +60,15 @@ public class DeviceInfoController {
         deviceInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
         return R.ok(deviceInfoService.save(deviceInfo));
     }
+    /**
+     * 设备信息
+     *
+     * @return 结果
+     */
+    @GetMapping("/list")
+    public R list() {
+        return R.ok(deviceInfoService.list());
+    }
 
     /**
      * 修改设备信息

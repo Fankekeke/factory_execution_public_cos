@@ -12,13 +12,16 @@
         si.user_id AS userId,
         si.content,
         si.images,
+        si.role_id,
         si.create_date AS createDate,
         tu.USERNAME AS userName,
         tu.`STATUS` AS accountStatus,
-        tu.LAST_LOGIN_TIME AS lastTime
+        tu.LAST_LOGIN_TIME AS lastTime,
+        tr.role_name AS roleName
         FROM
         student_info si
         LEFT JOIN t_user tu ON ( tu.USER_ID = si.user_id )
+        LEFT JOIN t_role tr ON ( tr.ROLE_ID = si.role_id )
         WHERE
         1 = 1
         <if test="studentInfo.name != null and studentInfo.name != ''">
@@ -31,4 +34,5 @@
             AND tu.`STATUS` = #{studentInfo.accountStatus}
         </if>
     </select>
+
 </mapper>

@@ -49,6 +49,9 @@ public class StudentInfo implements Serializable {
      */
     private String content;
 
+
+    private Integer roleId;
+
     /**
      * 创建时间
      */

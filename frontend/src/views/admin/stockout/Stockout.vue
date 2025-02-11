@@ -149,7 +149,7 @@ export default {
         title: '出库对象',
         dataIndex: 'userName'
       }, {
-        title: '采购部门',
+        title: '所属部门',
         dataIndex: 'team'
       }, {
         title: '总价',

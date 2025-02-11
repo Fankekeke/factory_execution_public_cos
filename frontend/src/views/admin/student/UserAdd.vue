@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model="show" title="新增用户" @cancel="onClose" :width="800">
+  <a-modal v-model="show" title="新增员工" @cancel="onClose" :width="800">
     <template slot="footer">
       <a-button key="back" @click="onClose">
         取消
@@ -11,7 +11,7 @@
     <a-form :form="form" layout="vertical">
       <a-row :gutter="20">
         <a-col :span="12">
-          <a-form-item label='用户名称' v-bind="formItemLayout">
+          <a-form-item label='员工名称' v-bind="formItemLayout">
             <a-input v-decorator="[
             'name',
             { rules: [{ required: true, message: '请输入名称!' }] }
@@ -24,6 +24,16 @@
             'team',
             { rules: [{ required: true, message: '请输入所属部门!' }] }
             ]"/>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item label='所属角色' v-bind="formItemLayout">
+            <a-select v-decorator="[
+            'roleId',
+            { rules: [{ required: true, message: '请输入所属角色!' }] }
+            ]" style="width: 100%" allowClear>
+              <a-select-option v-for="(item, index) in roleList" :value="item.roleId" :key="index">{{ item.roleName }}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :span="24">
@@ -78,11 +88,20 @@ export default {
       form: this.$form.createForm(this),
       loading: false,
       fileList: [],
+      roleList: [],
       previewVisible: false,
       previewImage: ''
     }
   },
+  mounted () {
+    this.queryRoleList()
+  },
   methods: {
+    queryRoleList () {
+      this.$get('/role/queryRoleList').then((r) => {
+        this.roleList = r.data.data
+      })
+    },
     handleCancel () {
       this.previewVisible = false
     },

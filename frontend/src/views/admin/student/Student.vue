@@ -7,7 +7,7 @@
           <div :class="advanced ? null: 'fold'">
             <a-col :md="6" :sm="24">
               <a-form-item
-                label="用户名称"
+                label="员工名称"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.name"/>
@@ -80,6 +80,7 @@
           <a-icon v-if="record.accountStatus == 0" type="caret-up" @click="editStatus(record, 1)" title="修 改"/>
           <a-icon v-if="record.accountStatus == 1" type="caret-down" @click="editStatus(record, 0)" title="修 改"/>
           <a-icon type="picture" v-if="record.images === null" @click="face(record)" title="照 片" style="margin-left: 15px"></a-icon>
+          <a-icon type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修 改" style="margin-left: 15px"></a-icon>
         </template>
       </a-table>
       <a-modal v-model="faceView.visiable" title="上传人脸照片">
@@ -186,10 +187,20 @@ export default {
     }),
     columns () {
       return [{
-        title: '用户名称',
+        title: '员工名称',
         dataIndex: 'name'
       }, {
-        title: '采购部门',
+        title: '所属角色',
+        dataIndex: 'roleName',
+        customRender: (text, row, index) => {
+          if (text !== null) {
+            return text
+          } else {
+            return '- -'
+          }
+        }
+      }, {
+        title: '所属部门',
         dataIndex: 'team',
         customRender: (text, row, index) => {
           if (text !== null) {
@@ -270,7 +281,7 @@ export default {
     },
     handleuserAddSuccess () {
       this.userAdd.visiable = false
-      this.$message.success('新增用户成功')
+      this.$message.success('新增员工成功')
       this.search()
     },
     edit (record) {
@@ -282,7 +293,7 @@ export default {
     },
     handleuserEditSuccess () {
       this.userEdit.visiable = false
-      this.$message.success('修改用户成功')
+      this.$message.success('修改员工成功')
       this.search()
     },
     handleCancel () {

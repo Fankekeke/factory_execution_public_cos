@@ -10,6 +10,7 @@ import cc.mrbird.febs.system.domain.RoleMenu;
 import cc.mrbird.febs.system.service.RoleMenuServie;
 import cc.mrbird.febs.system.service.RoleService;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.wuwenze.poi.ExcelKit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -46,7 +47,7 @@ public class RoleController extends BaseController {
 
     @GetMapping("/queryRoleList")
     public R queryRoleList() {
-        List<Role> list = roleService.list();
+        List<Role> list = roleService.list(Wrappers.<Role>lambdaQuery().ne(Role::getRoleName, "管理员").ne(Role::getRoleName, "注册用户").ne(Role::getRoleName, "普通用户").ne(Role::getRoleName, "超级管理员"));
         return R.ok(list);
     }
 

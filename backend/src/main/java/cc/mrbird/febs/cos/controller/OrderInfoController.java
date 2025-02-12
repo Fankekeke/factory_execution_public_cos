@@ -5,6 +5,7 @@ import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.OrderInfo;
 import cc.mrbird.febs.cos.service.IOrderInfoService;
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,17 @@ public class OrderInfoController {
     @GetMapping("/page")
     public R page(Page<OrderInfo> page, OrderInfo orderInfo) {
         return R.ok(orderInfoService.queryOrderPage(page, orderInfo));
+    }
+
+    /**
+     * 订单支付后回调-更新订单状态
+     *
+     * @param orderCode 订单编号
+     * @return 结果
+     */
+    @GetMapping("/payment")
+    public R payment(@RequestParam("orderCode") String orderCode) {
+        return R.ok(orderInfoService.payment(orderCode));
     }
 
     /**

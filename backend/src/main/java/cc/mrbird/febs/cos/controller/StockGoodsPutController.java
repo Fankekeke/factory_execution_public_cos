@@ -24,15 +24,25 @@ public class StockGoodsPutController {
     private final IStockGoodsPutService stockGoodsPutService;
 
     /**
-     * 分页获取物资商品库房信息樊安
+     * 分页获取物资商品库房信息
      *
-     * @param page           分页对象
+     * @param page          分页对象
      * @param stockGoodsPut 物资商品库房信息
      * @return 结果
      */
     @GetMapping("/page")
     public R page(Page<StockGoodsPut> page, StockGoodsPut stockGoodsPut) {
         return R.ok(stockGoodsPutService.queryStockGoodsPutPage(page, stockGoodsPut));
+    }
+
+    /**
+     * 获取商品库房入库记录
+     *
+     * @return 结果
+     */
+    @GetMapping("/list")
+    public R list() {
+        return R.ok(stockGoodsPutService.list());
     }
 
     /**

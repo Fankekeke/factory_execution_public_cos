@@ -10,6 +10,7 @@
         ri.theme,
         ri.dept_id,
         ri.staff_id,
+        ri.type,
         ri.content,
         ri.create_date,
         si.name,

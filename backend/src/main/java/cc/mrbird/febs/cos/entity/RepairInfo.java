@@ -45,6 +45,11 @@ public class RepairInfo implements Serializable {
     private Integer staffId;
 
     /**
+     * 类型（1.原材料 2.商品）
+     */
+    private String type;
+
+    /**
      * 备注
      */
     private String content;

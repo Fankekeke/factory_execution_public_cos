@@ -10,6 +10,7 @@
         si.theme,
         si.dept_id,
         si.staff_id,
+        si.type,
         si.content,
         si.create_date,
         si2.name,

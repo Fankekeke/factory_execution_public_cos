@@ -33,6 +33,16 @@ public class StockPutController {
     }
 
     /**
+     * 获取库房入库记录
+     *
+     * @return 结果
+     */
+    @GetMapping("/list")
+    public R list() {
+        return R.ok(stockPutService.list());
+    }
+
+    /**
      * 删除入库记录
      * @param ids
      * @return

@@ -78,8 +78,8 @@ public class ProductionProcessInfoController {
      * @return 结果
      */
     @PostMapping("/addWarehouse")
-    public R addWarehouse(ProductionProcessInfo productionProcessInfo) {
-        return R.ok();
+    public R addWarehouse(ProductionProcessInfo productionProcessInfo) throws FebsException {
+        return R.ok(productionProcessInfoService.addWarehouse(productionProcessInfo));
     }
 
     /**

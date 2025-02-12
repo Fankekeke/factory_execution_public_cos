@@ -33,7 +33,7 @@ public class StockGoodsOutServiceImpl extends ServiceImpl<StockGoodsOutMapper, S
     public Boolean stockOut(StockGoodsOut stockOut) {
         // 添加出库单
         stockOut.setCreateDate(DateUtil.formatDateTime(new Date()));
-        stockOut.setNum("OUT-" + System.currentTimeMillis());
+        stockOut.setNum("OUT-GOODS-" + System.currentTimeMillis());
         this.save(stockOut);
 
         // 出库

@@ -1,5 +1,6 @@
 package cc.mrbird.febs.cos.service;
 
+import cc.mrbird.febs.common.exception.FebsException;
 import cc.mrbird.febs.cos.entity.ProcessDetail;
 import cc.mrbird.febs.cos.entity.ProductionProcessInfo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -23,6 +24,30 @@ public interface IProductionProcessInfoService extends IService<ProductionProces
      * @return 结果
      */
     IPage<LinkedHashMap<String, Object>> queryProductionProcessPage(Page<ProductionProcessInfo> page, ProductionProcessInfo productionProcessInfo);
+
+    /**
+     * 更新流程状态
+     *
+     * @param productionProcessInfo 生产流程信息
+     * @return 结果
+     */
+    boolean updateProcessStatus(ProductionProcessInfo productionProcessInfo) throws FebsException;
+
+    /**
+     * 流程状态申请原材料
+     *
+     * @param productionProcessInfo 生产流程信息
+     * @return 结果
+     */
+    boolean requestProcessStatus(ProductionProcessInfo productionProcessInfo) throws FebsException;
+
+    /**
+     * 流程完成商品入库
+     *
+     * @param productionProcessInfo 生产流程信息
+     * @return 结果
+     */
+    boolean addWarehouse(ProductionProcessInfo productionProcessInfo) throws FebsException;
 
     /**
      * 获取生产流程信息详情

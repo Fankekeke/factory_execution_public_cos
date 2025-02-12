@@ -1,6 +1,8 @@
 package cc.mrbird.febs.cos.entity;
 
 import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -35,6 +37,11 @@ public class ProcessDetail implements Serializable {
     private String processCode;
 
     /**
+     * 申请单号
+     */
+    private String reqNum;
+
+    /**
      * 出库单号
      */
     private String outNum;
@@ -49,4 +56,13 @@ public class ProcessDetail implements Serializable {
      */
     @TableField(exist = false)
     private String deviceName;
+
+    /**
+     * 申请流程 0是正在审核 1是审核通过 2驳回
+     */
+    @TableField(exist = false)
+    private Integer passFlag;
+
+    @TableField(exist = false)
+    private List<LinkedHashMap<String, Object>> itemList;
 }

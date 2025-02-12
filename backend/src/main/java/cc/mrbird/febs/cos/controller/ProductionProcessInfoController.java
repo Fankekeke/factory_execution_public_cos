@@ -1,9 +1,12 @@
 package cc.mrbird.febs.cos.controller;
 
 
+import cc.mrbird.febs.common.exception.FebsException;
 import cc.mrbird.febs.common.utils.R;
+import cc.mrbird.febs.cos.entity.ProcessDetail;
 import cc.mrbird.febs.cos.entity.ProcessInfo;
 import cc.mrbird.febs.cos.entity.ProductionProcessInfo;
+import cc.mrbird.febs.cos.service.IProcessDetailService;
 import cc.mrbird.febs.cos.service.IProcessInfoService;
 import cc.mrbird.febs.cos.service.IProductionProcessInfoService;
 import cn.hutool.core.collection.CollUtil;
@@ -12,8 +15,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +35,8 @@ public class ProductionProcessInfoController {
 
     private final IProcessInfoService processInfoService;
 
+    private final IProcessDetailService processDetailService;
+
     /**
      * 分页获取生产流程信息
      *
@@ -39,6 +47,39 @@ public class ProductionProcessInfoController {
     @GetMapping("/page")
     public R page(Page<ProductionProcessInfo> page, ProductionProcessInfo productionProcessInfo) {
         return R.ok(productionProcessInfoService.queryProductionProcessPage(page, productionProcessInfo));
+    }
+
+    /**
+     * 更新流程状态
+     *
+     * @param productionProcessInfo 生产流程信息
+     * @return 结果
+     */
+    @PostMapping("/updateProcessStatus")
+    public R updateProcessStatus(ProductionProcessInfo productionProcessInfo) throws FebsException {
+        return R.ok(productionProcessInfoService.updateProcessStatus(productionProcessInfo));
+    }
+
+    /**
+     * 流程状态申请原材料
+     *
+     * @param productionProcessInfo 生产流程信息
+     * @return 结果
+     */
+    @PostMapping("/requestProcessStatus")
+    public R requestProcessStatus(ProductionProcessInfo productionProcessInfo) throws FebsException {
+        return R.ok(productionProcessInfoService.requestProcessStatus(productionProcessInfo));
+    }
+
+    /**
+     * 流程完成商品入库
+     *
+     * @param productionProcessInfo 生产流程信息
+     * @return 结果
+     */
+    @PostMapping("/addWarehouse")
+    public R addWarehouse(ProductionProcessInfo productionProcessInfo) {
+        return R.ok();
     }
 
     /**
@@ -70,6 +111,7 @@ public class ProductionProcessInfoController {
      * @return 结果
      */
     @PostMapping
+    @Transactional(rollbackFor = Exception.class)
     public R save(ProductionProcessInfo productionProcessInfo) {
         productionProcessInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
         productionProcessInfo.setCode("PCS-" + System.currentTimeMillis());
@@ -81,6 +123,16 @@ public class ProductionProcessInfoController {
         }
         productionProcessInfo.setStepNum(processList.size());
         productionProcessInfo.setCurrentStep(processList.get(0).getStepIndex());
+
+        // 添加流程详情
+        List<ProcessDetail> processDetailList = new ArrayList<>();
+        for (ProcessInfo processInfo : processList) {
+            ProcessDetail processDetail = new ProcessDetail();
+            processDetail.setProcessCode(productionProcessInfo.getCode());
+            processDetail.setStepIndex(processInfo.getStepIndex());
+            processDetailList.add(processDetail);
+        }
+        processDetailService.saveBatch(processDetailList);
         return R.ok(productionProcessInfoService.save(productionProcessInfo));
     }
 

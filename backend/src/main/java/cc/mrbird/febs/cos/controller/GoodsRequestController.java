@@ -36,6 +36,7 @@ public class GoodsRequestController {
 
     /**
      * 分页获取耗材申请
+     *
      * @param page
      * @param goodsRequest
      * @return
@@ -47,12 +48,13 @@ public class GoodsRequestController {
 
     /**
      * 新增耗材申请
+     *
      * @param goodsRequest
      * @return
      */
     @PostMapping
     public R save(GoodsRequest goodsRequest) {
-        goodsRequest.setNum("REQ-"+new Date().getTime());
+        goodsRequest.setNum("REQ-" + System.currentTimeMillis());
         goodsRequest.setStep(0);
         goodsRequest.setCreateDate(DateUtil.formatDateTime(new Date()));
         StudentInfo studentInfo = studentInfoService.getOne(Wrappers.<StudentInfo>lambdaQuery().eq(StudentInfo::getUserId, goodsRequest.getUserId()));
@@ -78,6 +80,7 @@ public class GoodsRequestController {
 
     /**
      * 修改耗材申请
+     *
      * @param goodsRequest
      * @return
      */
@@ -88,6 +91,7 @@ public class GoodsRequestController {
 
     /**
      * 删除耗材申请
+     *
      * @param ids
      * @return
      */

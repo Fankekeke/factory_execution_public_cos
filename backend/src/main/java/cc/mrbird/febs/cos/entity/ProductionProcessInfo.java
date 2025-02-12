@@ -1,9 +1,11 @@
 package cc.mrbird.febs.cos.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -64,5 +66,15 @@ public class ProductionProcessInfo implements Serializable {
      */
     private String createDate;
 
-
+    /**
+     * 采用设备ID
+     */
+    @TableField(exist = false)
+    private Integer deviceId;
+    @TableField(exist = false)
+    private String goods;
+    @TableField(exist = false)
+    private Integer userId;
+    @TableField(exist = false)
+    private BigDecimal price;
 }

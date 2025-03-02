@@ -79,7 +79,7 @@
         </template>
         <template slot="operation" slot-scope="text, record">
           <a-icon type="folder-add" @click="handleProductionView(record)" title="查 看"></a-icon>
-          <a-icon type="tool" @click="handleProductionView(record)" title="查 看" style="margin-right: 15px" v-if="record.currentStep != 6"></a-icon>
+          <a-icon type="tool" @click="view(record)" title="查 看" style="margin-left: 15px" v-if="record.currentStep != 6"></a-icon>
 <!--          <a-icon type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修 改"></a-icon>-->
         </template>
       </a-table>

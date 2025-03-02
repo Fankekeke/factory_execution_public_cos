@@ -3,8 +3,11 @@ package cc.mrbird.febs.cos.controller;
 
 import cc.mrbird.febs.common.utils.R;
 import cc.mrbird.febs.cos.entity.RepairInfo;
+import cc.mrbird.febs.cos.entity.StudentInfo;
 import cc.mrbird.febs.cos.service.IRepairInfoService;
+import cc.mrbird.febs.cos.service.IStudentInfoService;
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ import java.util.List;
 public class RepairInfoController {
 
     private final IRepairInfoService repairInfoService;
+
+    private final IStudentInfoService staffInfoService;
 
     /**
      * 分页获取维保信息
@@ -55,6 +60,11 @@ public class RepairInfoController {
     @PostMapping
     public R save(RepairInfo repairInfo) {
         repairInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
+        // 设置员工ID
+        StudentInfo staffInfo = staffInfoService.getOne(Wrappers.<StudentInfo>lambdaQuery().eq(StudentInfo::getUserId, repairInfo.getStaffId()));
+        if (staffInfo != null) {
+            repairInfo.setStaffId(staffInfo.getId());
+        }
         return R.ok(repairInfoService.save(repairInfo));
     }
 

@@ -21,14 +21,6 @@
                 <a-input v-model="queryParams.orderCode"/>
               </a-form-item>
             </a-col>
-            <a-col :md="6" :sm="24">
-              <a-form-item
-                label="商家名称"
-                :labelCol="{span: 5}"
-                :wrapperCol="{span: 18, offset: 1}">
-                <a-input v-model="queryParams.merchantName"/>
-              </a-form-item>
-            </a-col>
           </div>
           <span style="float: right; margin-top: 3px;">
             <a-button type="primary" @click="search">查询</a-button>
@@ -153,8 +145,8 @@ export default {
           }
         }
       }, {
-        title: '折后价格',
-        dataIndex: 'afterOrderPrice',
+        title: '价格',
+        dataIndex: 'orderPrice',
         customRender: (text, row, index) => {
           if (text !== null) {
             return text + '元'
@@ -189,26 +181,6 @@ export default {
           </a-popover>
         }
       }, {
-        title: '所属商家',
-        dataIndex: 'merchantName',
-        customRender: (text, row, index) => {
-          if (text !== null) {
-            return text
-          } else {
-            return '- -'
-          }
-        }
-      }, {
-        title: '获得积分',
-        dataIndex: 'integral',
-        customRender: (text, row, index) => {
-          if (text !== null) {
-            return text
-          } else {
-            return '- -'
-          }
-        }
-      }, {
         title: '评价时间',
         dataIndex: 'createDate',
         customRender: (text, row, index) => {
@@ -218,10 +190,6 @@ export default {
             return '- -'
           }
         }
-      }, {
-        title: '操作',
-        dataIndex: 'operation',
-        scopedSlots: {customRender: 'operation'}
       }]
     }
   },

@@ -5,28 +5,71 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d94e285-d1b0-4ce5-8593-dca4515a0d01" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/device/Device.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/device/DeviceAdd.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/device/DeviceEdit.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/production/Production.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/production/ProductionAdd.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/production/ProductionEdit.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/production/ProductionView.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/production/RurchaseView.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/repair/Repair.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/repair/RepairAdd.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/repair/RepairView.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/scrap/Scrap.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/scrap/ScrapAdd.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/scrap/ScrapView.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/stock/Stock.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/fabrication/stock/StockOut.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/goods/production/ProductionView.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/login/FaceRegist.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/manage/work/Work.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/controller/BulletinInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/controller/BulletinInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/controller/OrderInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/controller/OrderInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/controller/RepairInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/controller/RepairInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/controller/ScrapInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/controller/ScrapInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/dao/OrderInfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/dao/OrderInfoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/entity/OrderDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/entity/OrderDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/entity/OrderInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/entity/OrderInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/service/IOrderInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/service/IOrderInfoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/service/impl/OrderInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/service/impl/OrderInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/service/impl/ProductionProcessInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/service/impl/ProductionProcessInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/service/impl/UserInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/cos/service/impl/UserInfoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/system/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/cc/mrbird/febs/system/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/config/alipay.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/config/alipay.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/mapper/cos/EvaluateInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/mapper/cos/EvaluateInfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/mapper/cos/OrderInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/mapper/cos/OrderInfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/mapper/cos/RepairInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/mapper/cos/RepairInfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/mapper/cos/ScrapInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/mapper/cos/ScrapInfoMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/admin/Admin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/admin/Admin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/bulletin/Bulletin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/bulletin/Bulletin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/combo/Combo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/combo/Combo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/details/Details.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/details/Details.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/enterprise/Enterprise.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/enterprise/Enterprise.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/modules/setting.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/setting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/HomePage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/admin/goods/Goods.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/goods/Goods.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/replenishment/Replenishment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/replenishment/Replenishment.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/rurchase/Rurchase.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/rurchase/Rurchase.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/stock/Stock.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/stock/Stock.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/stockout/Stockout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/stockout/Stockout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/stockput/Stockput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/stockput/Stockput.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/store/Store.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/store/Store.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/student/Student.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/student/Student.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/type/Type.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/type/Type.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/unit/Unit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/unit/Unit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/purchase/record/Record.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/purchase/record/Record.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/purchase/request/Request.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/purchase/request/Request.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/purchase/rurchase/Rurchase.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/purchase/rurchase/Rurchase.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/stu/record/Record.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/stu/record/Record.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/stu/request/Request.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/stu/request/Request.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/system/user/User.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/system/user/User.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/student/UserAdd.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/student/UserAdd.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/student/UserEdit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/student/UserEdit.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/client/evaluate/Evaluate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/client/evaluate/Evaluate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/client/order/Order.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/client/order/Order.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/client/order/OrderAudit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/client/order/OrderAudit.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/client/order/OrderEvaluate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/client/order/OrderEvaluate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/client/order/OrderView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/client/order/OrderView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/client/pay/Pay.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/client/pay/Pay.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/common/HeaderAvatar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/common/HeaderAvatar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/process/Process.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/process/Process.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/production/Production.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/production/Production.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/repair/Repair.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/repair/Repair.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/repair/RepairAdd.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/repair/RepairAdd.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/scrap/Scrap.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/scrap/Scrap.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/scrap/ScrapAdd.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/scrap/ScrapAdd.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/goods/stock/Stock.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/goods/stock/Stock.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/login/Common.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/Common.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/login/Regist.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/login/Regist.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/user/evaluate/Evaluate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/user/evaluate/Evaluate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/user/order/Order.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/user/order/Order.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/user/order/OrderAudit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/user/order/OrderAudit.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/user/order/OrderEvaluate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/user/order/OrderEvaluate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/user/order/OrderView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/user/order/OrderView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/river-6968614.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/river-6968614.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,8 +96,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/dev/factory_execution_public_cos/frontend",
+    "last_opened_file_path": "G:/Project/20250126食品工厂生产系统/factory_execution_public_cos/frontend/src/views/user",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -65,11 +109,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="G:\Project\仓储管理系统\material_cos\frontend\src\views\purchase\request" />
-      <recent name="G:\Project\仓储管理系统\material_cos\frontend\src\views\admin\student" />
-      <recent name="G:\Project\仓储管理系统\material_cos\frontend\src\views\admin" />
-      <recent name="G:\Project\仓库管理系统\frontend\src\views\admin" />
-      <recent name="E:\Project\实验室耗材管理系统\frontend\src\utils" />
+      <recent name="G:\Project\20250126食品工厂生产系统\factory_execution_public_cos\frontend\src\views\user" />
+      <recent name="G:\Project\20250126食品工厂生产系统\factory_execution_public_cos\frontend\src\views\manage" />
+      <recent name="G:\Project\20250126食品工厂生产系统\factory_execution_public_cos\frontend\src\views\client" />
+      <recent name="G:\Project\20250126食品工厂生产系统\factory_execution_public_cos\frontend\src\views\login" />
+      <recent name="G:\Project\20250126食品工厂生产系统\factory_execution_public_cos\frontend\src\views\goods\production" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -135,6 +179,19 @@
       <workItem from="1720092209140" duration="15615000" />
       <workItem from="1721219387314" duration="906000" />
       <workItem from="1737869072584" duration="936000" />
+      <workItem from="1737899025143" duration="1213000" />
+      <workItem from="1738151700699" duration="766000" />
+      <workItem from="1738582427847" duration="1517000" />
+      <workItem from="1738587355194" duration="1234000" />
+      <workItem from="1738842161738" duration="1950000" />
+      <workItem from="1738931855258" duration="1211000" />
+      <workItem from="1739013715668" duration="45000" />
+      <workItem from="1739082039682" duration="725000" />
+      <workItem from="1739083078964" duration="18371000" />
+      <workItem from="1739750684668" duration="642000" />
+      <workItem from="1739798968670" duration="636000" />
+      <workItem from="1740799490579" duration="23004000" />
+      <workItem from="1740875544311" duration="9351000" />
     </task>
     <servers />
   </component>

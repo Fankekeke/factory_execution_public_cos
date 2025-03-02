@@ -35,7 +35,8 @@
           </a-button>
         </a-form-item>
         <div>
-          <a style="float: right" @click="regist">人脸识别登录</a>
+          <a style="float: left" @click="faceRegist">人脸识别登录</a>
+          <a style="float: right" @click="regist">注册账户</a>
         </div>
       </a-form>
     </div>
@@ -135,6 +136,9 @@ export default {
     },
     regist () {
       this.$emit('regist', 'Regist')
+    },
+    faceRegist () {
+      this.$emit('regist', 'FaceRegist')
     },
     getCaptcha () {
       this.$message.warning('暂未开发')

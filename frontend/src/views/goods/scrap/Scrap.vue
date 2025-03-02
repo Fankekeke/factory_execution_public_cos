@@ -7,7 +7,7 @@
           <div :class="advanced ? null: 'fold'">
             <a-col :md="6" :sm="24">
               <a-form-item
-                label="单号"
+                label="报废单号"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.num"/>
@@ -31,7 +31,7 @@
     </div>
     <div>
       <div class="operator">
-        <a-button type="primary" ghost @click="add">申请物品</a-button>
+<!--        <a-button type="primary" ghost @click="add">报废添加</a-button>-->
         <a-button @click="batchDelete">删除</a-button>
       </div>
       <!-- 表格区域 -->
@@ -123,11 +123,11 @@ export default {
     }),
     columns () {
       return [{
-        title: '申请单号',
+        title: '报废单号',
         dataIndex: 'num',
         scopedSlots: {customRender: 'numShow'}
       }, {
-        title: '申请人',
+        title: '报废申请人',
         dataIndex: 'name'
       }, {
         title: '申请说明',
@@ -143,22 +143,7 @@ export default {
           }
         }
       }, {
-        title: '当前流程',
-        dataIndex: 'step',
-        customRender: (text, row, index) => {
-          switch (text) {
-            case 0:
-              return <a-tag color="blue">等待审核</a-tag>
-            case 1:
-              return <a-tag color="green">审核通过</a-tag>
-            case 2:
-              return <a-tag color="red">驳回</a-tag>
-            default:
-              return '- -'
-          }
-        }
-      }, {
-        title: '申请时间',
+        title: '创建时间',
         dataIndex: 'createDate',
         customRender: (text, row, index) => {
           if (text !== null) {

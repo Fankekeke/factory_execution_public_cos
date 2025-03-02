@@ -2,6 +2,7 @@ package cc.mrbird.febs.cos.dao;
 
 import cc.mrbird.febs.cos.entity.OrderInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,5 +21,5 @@ public interface OrderInfoMapper extends BaseMapper<OrderInfo> {
      * @param orderInfo 订单信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryOrderPage(Page<OrderInfo> page, @Param("orderInfo") OrderInfo orderInfo);
+    IPage<LinkedHashMap<String, Object>> queryOrderPage(Page<OrderInfo> page, @Param("orderInfo") OrderInfo orderInfo);
 }

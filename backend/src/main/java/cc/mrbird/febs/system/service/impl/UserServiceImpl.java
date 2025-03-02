@@ -6,7 +6,9 @@ import cc.mrbird.febs.common.service.CacheService;
 import cc.mrbird.febs.common.utils.SortUtil;
 import cc.mrbird.febs.common.utils.MD5Util;
 import cc.mrbird.febs.cos.entity.StudentInfo;
+import cc.mrbird.febs.cos.entity.UserInfo;
 import cc.mrbird.febs.cos.service.IStudentInfoService;
+import cc.mrbird.febs.cos.service.IUserInfoService;
 import cc.mrbird.febs.system.dao.UserMapper;
 import cc.mrbird.febs.system.dao.UserRoleMapper;
 import cc.mrbird.febs.system.domain.User;
@@ -48,6 +50,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserManager userManager;
     @Autowired
     private IStudentInfoService studentInfoService;
+
+    @Autowired
+    private IUserInfoService userInfoService;
 
 
     @Override
@@ -178,11 +183,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setDescription("注册用户");
         this.save(user);
 
-        StudentInfo studentInfo = new StudentInfo();
-        studentInfo.setName(name);
-        studentInfo.setUserId(user.getUserId());
-        studentInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
-        studentInfoService.save(studentInfo);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setCode("UR-" + System.currentTimeMillis());
+        userInfo.setName(name);
+        userInfo.setUserId(user.getUserId());
+        userInfo.setCreateDate(DateUtil.formatDateTime(new Date()));
+        userInfoService.save(userInfo);
 
         UserRole ur = new UserRole();
         ur.setUserId(user.getUserId());

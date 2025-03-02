@@ -16,10 +16,11 @@
 import GlobalFooter from '../common/GlobalFooter'
 import Login from './Login'
 import Regist from './Regist'
+import FaceRegist from './FaceRegist'
 
 export default {
   name: 'Common',
-  components: {GlobalFooter, Login, Regist},
+  components: {GlobalFooter, Login, Regist, FaceRegist},
   data () {
     return {
       componentName: 'Login'
@@ -47,7 +48,8 @@ export default {
     flex-direction: column;
     height: 100vh;
     overflow: auto;
-    background: #f0f2f5 url(../../../static/img/river-6968614.png) no-repeat center ;
+    background: url(../../../static/img/river-6968614.png) no-repeat center ;
+    background-color: rgb(253,243,241);
     background-size: auto;
     .content {
       padding: 32px 0;

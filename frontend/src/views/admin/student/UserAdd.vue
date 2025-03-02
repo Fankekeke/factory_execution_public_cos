@@ -26,16 +26,6 @@
             ]"/>
           </a-form-item>
         </a-col>
-        <a-col :span="12">
-          <a-form-item label='所属角色' v-bind="formItemLayout">
-            <a-select v-decorator="[
-            'roleId',
-            { rules: [{ required: true, message: '请输入所属角色!' }] }
-            ]" style="width: 100%" allowClear>
-              <a-select-option v-for="(item, index) in roleList" :value="item.roleId" :key="index">{{ item.roleName }}</a-select-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
         <a-col :span="24">
           <a-form-item label='备注' v-bind="formItemLayout">
             <a-textarea :rows="6" v-decorator="[
@@ -133,6 +123,7 @@ export default {
         values.images = images.length > 0 ? images.join(',') : null
         if (!err) {
           values.publisher = this.currentUser.userId
+          values.roleId = 77
           this.loading = true
           this.$post('/cos/student-info', {
             ...values

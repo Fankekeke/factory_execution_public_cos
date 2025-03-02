@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" class="card-area">
+  <a-card :bordered="false" class="card-area" style="padding: 25px">
     <div :class="advanced ? 'search' : null">
       <!-- 搜索区域 -->
       <a-form layout="horizontal">
@@ -43,7 +43,7 @@
     </div>
     <div>
       <div class="operator">
-        <a-button type="primary" ghost @click="add">新增</a-button>
+<!--        <a-button type="primary" ghost @click="add">新增</a-button>-->
         <a-button @click="batchDelete">删除</a-button>
       </div>
       <!-- 表格区域 -->
@@ -78,8 +78,8 @@
           </template>
         </template>
         <template slot="operation" slot-scope="text, record">
-          <a-icon type="reconciliation" @click="view(record)" title="查 看" style="margin-right: 15px"></a-icon>
-<!--          <a-icon type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修 改"></a-icon>-->
+          <a-icon type="folder-add" @click="handleProductionView(record)" title="查 看"></a-icon>
+          <!--          <a-icon type="setting" theme="twoTone" twoToneColor="#4a9ff5" @click="edit(record)" title="修 改"></a-icon>-->
         </template>
       </a-table>
     </div>
@@ -97,9 +97,15 @@
     </unit-edit>
     <rurchase-view
       @close="handleRurchaseViewClose"
+      @success="handleRurchaseViewSuccess"
       :rurchaseShow="rurchaseView.visiable"
       :rurchaseData="rurchaseView.data">
     </rurchase-view>
+    <production-view
+      @close="handleProductionViewClose"
+      :rurchaseShow="productionView.visiable"
+      :rurchaseData="productionView.data">
+    </production-view>
   </a-card>
 </template>
 
@@ -108,13 +114,14 @@ import RangeDate from '@/components/datetime/RangeDate'
 import unitAdd from './ProductionAdd.vue'
 import unitEdit from './ProductionEdit.vue'
 import RurchaseView from './RurchaseView'
+import ProductionView from './ProductionView'
 import {mapState} from 'vuex'
 import moment from 'moment'
 moment.locale('zh-cn')
 
 export default {
   name: 'unit',
-  components: {unitAdd, unitEdit, RurchaseView, RangeDate},
+  components: {unitAdd, unitEdit, RurchaseView, ProductionView, RangeDate},
   data () {
     return {
       advanced: false,
@@ -125,6 +132,10 @@ export default {
         visiable: false
       },
       rurchaseView: {
+        visiable: false,
+        data: null
+      },
+      productionView: {
         visiable: false,
         data: null
       },
@@ -182,6 +193,8 @@ export default {
               return <a-tag>商品打包</a-tag>
             case 5:
               return <a-tag>入库印刷</a-tag>
+            case 6:
+              return <a-tag color="#87d068">完成</a-tag>
             default:
               return '- -'
           }
@@ -238,6 +251,18 @@ export default {
     },
     handleRurchaseViewClose () {
       this.rurchaseView.visiable = false
+    },
+    handleProductionView (row) {
+      this.productionView.data = row
+      this.productionView.visiable = true
+    },
+    handleProductionViewClose () {
+      this.productionView.visiable = false
+    },
+    handleRurchaseViewSuccess () {
+      this.rurchaseView.visiable = false
+      this.$message.success('提交成功')
+      this.search()
     },
     onSelectChange (selectedRowKeys) {
       this.selectedRowKeys = selectedRowKeys

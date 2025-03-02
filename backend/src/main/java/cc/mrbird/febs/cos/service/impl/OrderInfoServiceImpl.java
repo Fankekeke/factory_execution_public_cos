@@ -3,14 +3,13 @@ package cc.mrbird.febs.cos.service.impl;
 import cc.mrbird.febs.common.exception.FebsException;
 import cc.mrbird.febs.cos.entity.*;
 import cc.mrbird.febs.cos.dao.OrderInfoMapper;
-import cc.mrbird.febs.cos.service.IGoodsBelongService;
-import cc.mrbird.febs.cos.service.IOrderInfoService;
-import cc.mrbird.febs.cos.service.IStockGoodsOutService;
-import cc.mrbird.febs.cos.service.IUserInfoService;
+import cc.mrbird.febs.cos.service.*;
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,6 +37,10 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
 
     private final IStockGoodsOutService stockGoodsOutService;
 
+    private final IAddressInfoService addressInfoService;
+
+    private final IOrderDetailService orderDetailService;
+
     /**
      * 分页获取订单信息
      *
@@ -45,8 +49,48 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
      * @return 结果
      */
     @Override
-    public List<LinkedHashMap<String, Object>> queryOrderPage(Page<OrderInfo> page, OrderInfo orderInfo) {
+    public IPage<LinkedHashMap<String, Object>> queryOrderPage(Page<OrderInfo> page, OrderInfo orderInfo) {
         return baseMapper.queryOrderPage(page, orderInfo);
+    }
+
+    /**
+     * 订单详情
+     *
+     * @param id 主键
+     * @return 结果
+     */
+    @Override
+    public LinkedHashMap<String, Object> queryOrderDetail(Integer id) {
+        // 返回数据
+        LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>() {
+            {
+                put("order", null);
+                put("address", null);
+                put("orderDetail", null);
+                put("user", null);
+            }
+        };
+        // 订单信息
+        OrderInfo orderInfo = this.getOne(Wrappers.<OrderInfo>lambdaQuery().eq(OrderInfo::getId, id));
+        if (orderInfo != null) {
+            map.put("order", orderInfo);
+        }
+        //用户信息
+        if (orderInfo != null) {
+            UserInfo userInfo = userInfoService.getOne(Wrappers.<UserInfo>lambdaQuery().eq(UserInfo::getId, orderInfo.getUserId()));
+            if (userInfo != null) {
+                map.put("user", userInfo);
+            }
+        }
+        // 收货地址
+        AddressInfo addressInfo = addressInfoService.getById(orderInfo.getAddressId());
+        if (addressInfo != null) {
+            map.put("address", addressInfo);
+        }
+        // 订单详情
+        List<OrderDetail> orderDetailList = orderDetailService.list(Wrappers.<OrderDetail>lambdaQuery().eq(OrderDetail::getOrderCode, orderInfo.getCode()));
+        map.put("orderDetail", orderDetailList);
+        return map;
     }
 
     /**
@@ -114,9 +158,26 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         stockGoodsOut.setHandler("管理员");
         stockGoodsOut.setCreateDate(DateUtil.formatDateTime(new Date()));
         stockGoodsOut.setOrderId(orderInfo.getId());
-        stockGoodsOut.setGoods(orderInfo.getGoods());
+
+        GoodsBelong goodsBelong = new GoodsBelong();
+        // 订单详情
+        List<OrderDetail> orderDetailList = orderDetailService.list(Wrappers.<OrderDetail>lambdaQuery().eq(OrderDetail::getOrderCode, orderCode));
+        if (CollectionUtil.isNotEmpty(orderDetailList)) {
+            OrderDetail orderDetail = orderDetailList.get(0);
+            goodsBelong.setAmount(orderDetail.getAmount());
+            goodsBelong.setName(orderDetail.getGoodsName());
+            goodsBelong.setPrice(orderDetail.getUnitPrice());
+            goodsBelong.setType(orderDetail.getType());
+            goodsBelong.setTypeId(orderDetail.getTypeId());
+            goodsBelong.setUnit(orderDetail.getUnit());
+            goodsBelong.setNum(orderCode);
+            goodsBelong.setCreateDate(DateUtil.formatDateTime(new Date()));
+            List<GoodsBelong> goodsBelongList = new ArrayList<>();
+            goodsBelongList.add(goodsBelong);
+            stockGoodsOut.setGoods(JSONUtil.toJsonStr(goodsBelongList));
+        }
 
         stockGoodsOutService.stockOut(stockGoodsOut);
-        return this.update(Wrappers.<OrderInfo>lambdaUpdate().set(OrderInfo::getStatus, 1).eq(OrderInfo::getCode, orderCode));
+        return this.update(Wrappers.<OrderInfo>lambdaUpdate().set(OrderInfo::getStatus, 3).eq(OrderInfo::getCode, orderCode));
     }
 }

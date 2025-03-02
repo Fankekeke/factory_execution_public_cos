@@ -14,6 +14,7 @@
         ri.content,
         ri.create_date,
         si.name,
+        si.team,
         si.images
         from
         repair_info ri

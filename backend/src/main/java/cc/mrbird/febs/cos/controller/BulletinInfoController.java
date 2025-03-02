@@ -27,6 +27,7 @@ public class BulletinInfoController {
 
     /**
      * 分页获取公告信息
+     *
      * @param page
      * @param bulletinInfo
      * @return
@@ -38,8 +39,14 @@ public class BulletinInfoController {
                 .like(!StrUtil.isBlank(bulletinInfo.getContent()), BulletinInfo::getContent, bulletinInfo.getContent())));
     }
 
+    @GetMapping("/list")
+    public R list() {
+        return R.ok(bulletinInfoService.list());
+    }
+
     /**
      * 新增公告信息
+     *
      * @param bulletinInfo
      * @return
      */
@@ -51,6 +58,7 @@ public class BulletinInfoController {
 
     /**
      * 修改公告信息
+     *
      * @param bulletinInfo
      * @return
      */
@@ -61,6 +69,7 @@ public class BulletinInfoController {
 
     /**
      * 删除公告信息
+     *
      * @param ids
      * @return
      */

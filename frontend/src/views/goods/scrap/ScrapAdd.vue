@@ -1,6 +1,6 @@
 <template>
   <a-drawer
-    title="新增物品申请"
+    title="新增入库报废"
     :maskClosable="false"
     placement="right"
     :closable="false"
@@ -12,7 +12,7 @@
     <a-form :form="form" layout="vertical">
       <a-row :gutter="20">
         <a-col :span="12">
-          <a-form-item label='选择套餐' v-bind="formItemLayout">
+          <a-form-item label='选择报废入库记录' v-bind="formItemLayout">
             <a-select v-model="comboNum" @change="handleChange" style="width: 100%">
               <a-select-option v-for="(item, index) in comboList" :value="item.code" :key="index">{{ item.name }}</a-select-option>
             </a-select>
@@ -49,9 +49,9 @@
               <a-input-number v-model="record.price" :min="1"/>
             </template>
           </a-table>
-          <a-button @click="dataAdd" type="primary" ghost size="large" style="margin-top: 10px;width: 100%">
-            新增物品
-          </a-button>
+<!--          <a-button @click="dataAdd" type="primary" ghost size="large" style="margin-top: 10px;width: 100%">-->
+<!--            新增物品-->
+<!--          </a-button>-->
         </a-col>
       </a-row>
     </a-form>

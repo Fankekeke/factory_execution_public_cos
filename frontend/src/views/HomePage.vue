@@ -4,9 +4,9 @@
       <a-card class="head-info-card">
         <a-skeleton active v-if="loading" />
         <a-col :span="12" v-if="!loading">
-          <div class="head-info-avatar">
-            <img alt="头像" :src="avatar">
-          </div>
+<!--          <div class="head-info-avatar">-->
+<!--            <img alt="头像" :src="avatar">-->
+<!--          </div>-->
           <div class="head-info-count">
             <div class="head-info-welcome">
               {{welcomeMessage}}
@@ -17,7 +17,7 @@
             <div class="head-info-time">上次登录时间：{{user.lastLoginTime ? user.lastLoginTime : '第一次访问系统'}}</div>
           </div>
         </a-col>
-        <a-col :span="12" v-if="!loading">
+        <a-col :span="12" v-if="!loading && user.roleId != 74">
           <div>
             <a-row class="more-info" v-if="user.roleId != 74 && stockInfo !== null">
               <a-col :span="4"></a-col>
@@ -37,22 +37,22 @@
         </a-col>
       </a-card>
     </a-row>
-    <a @click="orderMapOpen">统计看板</a>
-    <a-row :gutter="15" class="count-info" v-if="user.roleId == 74">
-      <a-col :span="8" class="project-wrapper" style="padding: 0">
-        <a-card hoverable class="visit-count">
-          <a-skeleton active v-if="loading" />
-          <apexchart v-if="!loading" type="donut" height=250 :options="chartOptions5" :series="series5"></apexchart>
-        </a-card>
-      </a-col>
-      <a-col :span="16">
-        <a-card hoverable>
-          <a-skeleton active v-if="loading" />
-          <apexchart v-if="!loading" type="bar" height="280" :options="chartOptions6" :series="series6"></apexchart>
-        </a-card>
-      </a-col>
-    </a-row>
-    <a-row :gutter="15" class="count-info" style="margin-top: 15px">
+    <a @click="orderMapOpen" v-if="user.roleId != 74">统计看板</a>
+<!--    <a-row :gutter="15" class="count-info" v-if="user.roleId != 74">-->
+<!--      <a-col :span="8" class="project-wrapper" style="padding: 0">-->
+<!--        <a-card hoverable class="visit-count">-->
+<!--          <a-skeleton active v-if="loading" />-->
+<!--          <apexchart v-if="!loading" type="donut" height=250 :options="chartOptions5" :series="series5"></apexchart>-->
+<!--        </a-card>-->
+<!--      </a-col>-->
+<!--      <a-col :span="16">-->
+<!--        <a-card hoverable>-->
+<!--          <a-skeleton active v-if="loading" />-->
+<!--          <apexchart v-if="!loading" type="bar" height="280" :options="chartOptions6" :series="series6"></apexchart>-->
+<!--        </a-card>-->
+<!--      </a-col>-->
+<!--    </a-row>-->
+    <a-row  v-if="user.roleId != 74" :gutter="15" class="count-info" style="margin-top: 15px">
       <a-col :span="12" class="project-wrapper" style="padding: 0">
         <a-card hoverable :loading="loading" title="公告信息">
           <div>
@@ -141,6 +141,7 @@
         </a-row>
       </a-col>
     </a-row>
+    <work v-if="user.roleId == 74"></work>
     <board
       @close="handleorderMapViewClose"
       :orderShow="orderMapView.visiable">
@@ -149,6 +150,7 @@
 </template>
 <script>
 import board from '../views/admin/board/Board.vue'
+import Work from './manage/work/Work'
 import HeadInfo from '@/views/common/HeadInfo'
 import {mapState} from 'vuex'
 import moment from 'moment'
@@ -160,7 +162,7 @@ const formItemLayout = {
 }
 export default {
   name: 'HomePage',
-  components: {HeadInfo, board},
+  components: {HeadInfo, board, Work},
   data () {
     return {
       orderMapView: {
@@ -509,66 +511,70 @@ export default {
     }
   },
   mounted () {
-    this.home()
+    if (this.user.roleId != 74) {
+      this.home()
+    }
     this.welcomeMessage = this.welcome()
-    this.$get(`index/${this.user.username}`).then((r) => {
-      let data = r.data.data
-      this.todayIp = data.todayIp
-      this.todayVisitCount = data.todayVisitCount
-      this.totalVisitCount = data.totalVisitCount
-      let sevenVisitCount = []
-      let dateArr = []
-      for (let i = 6; i >= 0; i--) {
-        let time = moment().subtract(i, 'days').format('MM-DD')
-        let contain = false
-        for (let o of data.lastSevenVisitCount) {
-          if (o.days === time) {
-            contain = true
-            sevenVisitCount.push(o.count)
+    if (this.user.roleId != 74) {
+      this.$get(`index/${this.user.username}`).then((r) => {
+        let data = r.data.data
+        this.todayIp = data.todayIp
+        this.todayVisitCount = data.todayVisitCount
+        this.totalVisitCount = data.totalVisitCount
+        let sevenVisitCount = []
+        let dateArr = []
+        for (let i = 6; i >= 0; i--) {
+          let time = moment().subtract(i, 'days').format('MM-DD')
+          let contain = false
+          for (let o of data.lastSevenVisitCount) {
+            if (o.days === time) {
+              contain = true
+              sevenVisitCount.push(o.count)
+            }
+          }
+          if (!contain) {
+            sevenVisitCount.push(0)
+          }
+          dateArr.push(time)
+        }
+        let sevenUserVistCount = []
+        for (let i = 6; i >= 0; i--) {
+          let time = moment().subtract(i, 'days').format('MM-DD')
+          let contain = false
+          for (let o of data.lastSevenUserVisitCount) {
+            if (o.days === time) {
+              contain = true
+              sevenUserVistCount.push(o.count)
+            }
+          }
+          if (!contain) {
+            sevenUserVistCount.push(0)
           }
         }
-        if (!contain) {
-          sevenVisitCount.push(0)
-        }
-        dateArr.push(time)
-      }
-      let sevenUserVistCount = []
-      for (let i = 6; i >= 0; i--) {
-        let time = moment().subtract(i, 'days').format('MM-DD')
-        let contain = false
-        for (let o of data.lastSevenUserVisitCount) {
-          if (o.days === time) {
-            contain = true
-            sevenUserVistCount.push(o.count)
+        this.$refs.count.updateSeries([
+          {
+            name: '您',
+            data: sevenUserVistCount
+          },
+          {
+            name: '总数',
+            data: sevenVisitCount
           }
-        }
-        if (!contain) {
-          sevenUserVistCount.push(0)
-        }
-      }
-      this.$refs.count.updateSeries([
-        {
-          name: '您',
-          data: sevenUserVistCount
-        },
-        {
-          name: '总数',
-          data: sevenVisitCount
-        }
-      ], true)
-      this.$refs.count.updateOptions({
-        xaxis: {
-          categories: dateArr
-        },
-        title: {
-          text: '近七日系统访问记录',
-          align: 'left'
-        }
-      }, true, true)
-    }).catch((r) => {
-      console.error(r)
-      this.$message.error('获取首页信息失败')
-    })
+        ], true)
+        this.$refs.count.updateOptions({
+          xaxis: {
+            categories: dateArr
+          },
+          title: {
+            text: '近七日系统访问记录',
+            align: 'left'
+          }
+        }, true, true)
+      }).catch((r) => {
+        console.error(r)
+        this.$message.error('获取首页信息失败')
+      })
+    }
   }
 }
 </script>

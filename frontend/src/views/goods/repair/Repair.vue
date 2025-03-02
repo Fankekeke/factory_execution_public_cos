@@ -7,38 +7,10 @@
           <div :class="advanced ? null: 'fold'">
             <a-col :md="6" :sm="24">
               <a-form-item
-                label="申请单号"
+                label="维保单号"
                 :labelCol="{span: 5}"
                 :wrapperCol="{span: 18, offset: 1}">
                 <a-input v-model="queryParams.num"/>
-              </a-form-item>
-            </a-col>
-            <a-col :md="6" :sm="24">
-              <a-form-item
-                label="申请人"
-                :labelCol="{span: 5}"
-                :wrapperCol="{span: 18, offset: 1}">
-                <a-input v-model="queryParams.name"/>
-              </a-form-item>
-            </a-col>
-            <a-col :md="6" :sm="24">
-              <a-form-item
-                label="采购小组"
-                :labelCol="{span: 5}"
-                :wrapperCol="{span: 18, offset: 1}">
-                <a-input v-model="queryParams.team"/>
-              </a-form-item>
-            </a-col>
-            <a-col :md="6" :sm="24">
-              <a-form-item
-                label="审核状态"
-                :labelCol="{span: 5}"
-                :wrapperCol="{span: 18, offset: 1}">
-                <a-select v-model="queryParams.step" allowClear>
-                  <a-select-option value="0">正在审核</a-select-option>
-                  <a-select-option value="1">审核成功</a-select-option>
-                  <a-select-option value="2">驳回</a-select-option>
-                </a-select>
               </a-form-item>
             </a-col>
           </div>
@@ -51,7 +23,7 @@
     </div>
     <div>
       <div class="operator">
-        <a-button type="primary" ghost @click="add">申请物品</a-button>
+<!--        <a-button type="primary" ghost @click="add">维保添加</a-button>-->
         <a-button @click="batchDelete">删除</a-button>
       </div>
       <!-- 表格区域 -->
@@ -143,11 +115,11 @@ export default {
     }),
     columns () {
       return [{
-        title: '申请单号',
+        title: '维保单号',
         dataIndex: 'num',
         scopedSlots: {customRender: 'numShow'}
       }, {
-        title: '申请人',
+        title: '维保申请人',
         dataIndex: 'name'
       }, {
         title: '申请说明',
@@ -160,21 +132,6 @@ export default {
             return text
           } else {
             return '- -'
-          }
-        }
-      }, {
-        title: '当前流程',
-        dataIndex: 'step',
-        customRender: (text, row, index) => {
-          switch (text) {
-            case 0:
-              return <a-tag color="blue">等待审核</a-tag>
-            case 1:
-              return <a-tag color="green">审核通过</a-tag>
-            case 2:
-              return <a-tag color="red">驳回</a-tag>
-            default:
-              return '- -'
           }
         }
       }, {

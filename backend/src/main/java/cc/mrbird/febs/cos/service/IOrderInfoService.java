@@ -2,8 +2,10 @@ package cc.mrbird.febs.cos.service;
 
 import cc.mrbird.febs.common.exception.FebsException;
 import cc.mrbird.febs.cos.entity.OrderInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.LinkedHashMap;
@@ -21,7 +23,15 @@ public interface IOrderInfoService extends IService<OrderInfo> {
      * @param orderInfo 订单信息
      * @return 结果
      */
-    List<LinkedHashMap<String, Object>> queryOrderPage(Page<OrderInfo> page, OrderInfo orderInfo);
+    IPage<LinkedHashMap<String, Object>> queryOrderPage(Page<OrderInfo> page, OrderInfo orderInfo);
+
+    /**
+     * 订单详情
+     *
+     * @param id 主键
+     * @return 结果
+     */
+    LinkedHashMap<String, Object> queryOrderDetail(Integer id);
 
     /**
      * 新增订单信息

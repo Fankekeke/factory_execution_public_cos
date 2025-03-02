@@ -43,6 +43,7 @@ public class OrderDetail implements Serializable {
      * 型号
      */
     private String type;
+    private String unit;
 
     /**
      * 商品数量

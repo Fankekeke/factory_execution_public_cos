@@ -56,6 +56,16 @@ public class OrderInfo implements Serializable {
      */
     private String createDate;
 
+    @TableField(exist = false)
     private String goods;
+
+    @TableField(exist = false)
+    private String name;
+
+    @TableField(exist = false)
+    private String phone;
+
+    @TableField(exist = false)
+    private String address;
 
 }

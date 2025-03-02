@@ -15,15 +15,21 @@
         ui.name,
         ui.phone,
         ui.images as userImages,
-        ai.address
+        ai.address,
+        ei.id AS evaluateId
         from
         order_info oi
         left join user_info ui on
         (ui.id = oi.user_id)
         left join address_info ai on
         (ai.id = oi.address_id)
+        left join evaluate_info ei on
+        (ei.order_id = oi.id)
         where
         1 = 1
+        <if test="orderInfo.code != null and orderInfo.code != ''">
+            AND oi.code LIKE CONCAT('%',#{orderInfo.code},'%')
+        </if>
         <if test="orderInfo.name != null and orderInfo.name != ''">
             AND ui.name LIKE CONCAT('%',#{orderInfo.name},'%')
         </if>

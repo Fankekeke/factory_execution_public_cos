@@ -14,6 +14,7 @@
         si.content,
         si.create_date,
         si2.name,
+        si2.team,
         si2.images
         from
         scrap_info si

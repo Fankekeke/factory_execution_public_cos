@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -81,7 +82,7 @@ public class ProductionProcessInfoServiceImpl extends ServiceImpl<ProductionProc
         // 提交申请单
         if ("1".equals(productionProcessInfo.getStatus())) {
             // 校验当前流程申请是否审批通过
-            ProcessDetail currentProcessDetail = processDetailList.get(productionProcessInfo.getCurrentStep());
+            ProcessDetail currentProcessDetail = processDetailList.get(productionProcessInfo.getCurrentStep() - 1);
             if (currentProcessDetail == null) {
                 throw new FebsException("当前流程不存在！");
             } else {
@@ -126,6 +127,7 @@ public class ProductionProcessInfoServiceImpl extends ServiceImpl<ProductionProc
         ProcessDetail currentProcessDetail = processDetailMap.get(productionProcessInfo.getCurrentStep());
         if (currentProcessDetail != null) {
             currentProcessDetail.setReqNum(requestNum);
+            currentProcessDetail.setDeviceId(productionProcessInfo.getDeviceId());
             processDetailService.updateById(currentProcessDetail);
         }
 
@@ -146,8 +148,19 @@ public class ProductionProcessInfoServiceImpl extends ServiceImpl<ProductionProc
             throw new FebsException("入库商品不能为空！");
         }
 
+        JSONArray array = JSONUtil.parseArray(productionProcessInfo.getGoods());
+        List<GoodsBelong> goodsBelongList = JSONUtil.toList(array, GoodsBelong.class);
+        // 计算总价格
+        BigDecimal totalPrice = BigDecimal.ZERO;
+        for (GoodsBelong item : goodsBelongList) {
+            totalPrice = totalPrice.add(item.getPrice().multiply(new BigDecimal(item.getAmount())));
+        }
+
+        // 员工信息
+        StudentInfo studentInfo = studentInfoService.getOne(Wrappers.<StudentInfo>lambdaQuery().eq(StudentInfo::getUserId, productionProcessInfo.getLaseOperator()));
+
         // 添加商品入库到GOODS STOCK
-        stockGoodsInfoService.stockPut(productionProcessInfo.getGoods(), productionProcessInfo.getLaseOperator(), productionProcessInfo.getLaseOperator(), productionProcessInfo.getContent(), productionProcessInfo.getPrice());
+        stockGoodsInfoService.stockPut(productionProcessInfo.getGoods(), studentInfo.getName(), studentInfo.getName(), productionProcessInfo.getContent(), totalPrice);
 
         // 更新流程信息
         productionProcessInfo.setStatus("1");
@@ -174,7 +187,7 @@ public class ProductionProcessInfoServiceImpl extends ServiceImpl<ProductionProc
         Map<String, Integer> goodsRequestMap = new HashMap<>(16);
         if (CollectionUtil.isNotEmpty(reqNumList)) {
             List<GoodsRequest> goodsRequestList = goodsRequestService.list(Wrappers.<GoodsRequest>lambdaQuery().in(GoodsRequest::getNum, reqNumList));
-            goodsRequestMap = goodsRequestList.stream().collect(Collectors.toMap(GoodsRequest::getNum, GoodsRequest::getProcess));
+            goodsRequestMap = goodsRequestList.stream().collect(Collectors.toMap(GoodsRequest::getNum, GoodsRequest::getStep));
         }
 
         // 获取设备信息
@@ -182,7 +195,7 @@ public class ProductionProcessInfoServiceImpl extends ServiceImpl<ProductionProc
         Map<Integer, String> deviceMap = deviceInfoList.stream().collect(Collectors.toMap(DeviceInfo::getId, DeviceInfo::getDeviceName));
         for (ProcessDetail processDetail : processDetailList) {
             // 获取原材料出库详情
-            if (StrUtil.isNotEmpty(processDetail.getOutNum())) {
+            if (StrUtil.isNotEmpty(processDetail.getReqNum())) {
                 List<LinkedHashMap<String, Object>> itemList = goodsBelongService.getGoodsByNum(processDetail.getReqNum());
                 processDetail.setItemList(itemList);
                 // 是否审批通过

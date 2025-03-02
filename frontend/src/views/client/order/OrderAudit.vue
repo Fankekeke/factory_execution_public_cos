@@ -267,7 +267,6 @@ export default {
     }
   },
   mounted () {
-    this.selectStaffList()
   },
   methods: {
     moment,

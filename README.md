@@ -1,44 +1,17 @@
-### 基于SpringBoot + Vue的食品工厂制造系统 工厂货物系统.
+![](https://img.shields.io/badge/License-MIT-blue.svg)
 
-食品系统、生产批次溯源、数字化车间、仓储管理、生产排程
+![](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)
 
-###### 管理员：
-流程管理（初级产品加工、二次加工、食品制造、食品分装）、食品制造流程，员工管理、设备管理、原材料管理、工艺路线管理、客户管理、库房管理、库房统计、出库管理、出库管理、订单管理、订单支付记录、客户收货地址管理、原料审批出库、数据统计。
+![](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-###### 员工：
-员工信息、修改密码、订单管理、设备维修、库房管理，食品制造流程、流程原料申请。
+# 基于 SpringBoot + Vue 的食品加工厂生产管理 (Food Factory Manufacturing System)
 
-###### 用户：
-用户注册、修改密码、用户信息、商品选购、订单支付、订单管理、订单评价、收货地址管理。
+流程管理 · 工艺路线 · 原料批次 · 工单执行 · 库房预警 · 设备维保 · 订单支付 · 数据统计 · 多角色协同
 
-##### 制造加工与工艺管理
-###### 流程管理/制造： 涵盖初加、精加到分装的全链路管控，确保食品生产每道工序符合工艺标准。
-
-###### 工艺路线管理： 科学定义产品加工路径与技术参数，标准化作业流程，保障食品品质的高度统一。
-
-###### 制造流程/原料申请： 员工根据产线进度在线申领物料，实现生产需求与库房供应的精准对接。
-
-##### 物资供应与仓储物流
-###### 原材料/库房管理： 全面监管原料入库、存储与保质期，通过数字化盘点确保库存状态实时透明。
-
-###### 原料审批/出库： 管理员严格审核生产领料请求，记录物料流向，实现食品生产的正向与反向溯源。
-
-###### 客户/收货地址： 维护完善的客户档案与多地收货信息，为成品精准配送提供核心基础数据支持。
-
-##### 设备运维与资源配置
-###### 设备管理/维修： 建立设备电子档案并跟进维修进度，预防性维护保障产线平稳运行，降低停工风险。
-
-###### 员工管理/信息： 统一管控工厂人员权限与岗位信息，支持密码自主修改，确保生产操作责任到人。
-
-##### 商业交易与订单执行
-###### 商品选购/支付： 为用户提供直观的食品选购界面与安全支付通道，缩短从车间到餐桌的交易链路。
-
-###### 订单管理/记录： 记录从下单、支付到评价的全生命周期，协助管理人员监控销售动态与服务质量。
-
-##### 数据统计与辅助决策
-###### 库房统计/数据： 聚合生产成本、库存损耗及订单营收等多维指标，通过可视化报表辅助工厂经营决策。
+本项目是一套面向食品加工企业的轻量级 MES + 进销存一体化制造管理系统，采用前后端分离架构，覆盖**管理员、员工、用户（客户）**三类角色。系统围绕"食品制造流程、工艺路线、原材料批次、库房管理、出库审批、订单管理、在线支付、设备维修、数据统计"等核心业务设计，支持从初级产品加工、二次加工、食品制造、食品分装全流程管理，实现原料到成品的批次追溯、工单执行、库存预警、设备维保、订单履约、支付对账的全链路数字化管控，适用于中小型食品加工厂、预制菜工厂、烘焙工厂、肉制品加工厂、饮料分装厂等场景。
 
 #### 安装环境
+️**注意**：请确保您的开发环境已安装以下依赖。
 
 JAVA 环境 
 
@@ -46,24 +19,147 @@ Node.js环境 [https://nodejs.org/en/] 选择14.17
 
 Yarn 打开cmd， 输入npm install -g yarn !!!必须安装完毕nodejs
 
-Mysql 数据库 [https://blog.csdn.net/qq_40303031/article/details/88935262] 一定要把账户和密码记住
+Mysql 数据库 一定要把账户和密码记住
 
 redis
 
-Idea 编译器 [https://blog.csdn.net/weixin_44505194/article/details/104452880]
+Idea 编译器
 
-WebStorm OR VScode 编译器 [https://www.jianshu.com/p/d63b5bae9dff]
+WebStorm OR VScode 编译器
 
 #### 采用技术及功能
 
 后端：SpringBoot、MybatisPlus、MySQL、Redis、
 前端：Vue、Apex、Antd、Axios
 
-平台前端：vue(框架) + vuex(全局缓存) + rue-router(路由) + axios(请求插件) + apex(图表)  + antd-ui(ui组件)
+平台前端：vue(框架) + vuex(全局缓存) + rue-router(路由) + axios(请求插件) + apex(图表)  + antd-ui(ui组件) + 百度地图 API
 
 平台后台：springboot(框架) + redis(缓存中间件) + shiro(权限中间件) + mybatisplus(orm) + restful风格接口 + mysql(数据库)
 
 开发环境：windows10 or windows7 ， vscode or webstorm ， idea + lambok
+
+---
+
+## 核心特性
+
+- **三角色权限体系**：区分管理员、员工、用户（客户），基于 RBAC 模型实现功能权限与数据权限控制，管理员负责全局配置与审批，员工负责生产执行与设备维保，用户负责商品选购与订单管理。
+- **四阶制造流程管理**：覆盖初级产品加工（原料预处理）、二次加工（深加工/配方加工）、食品制造（成品生产）、食品分装（包装赋码）四大阶段，支持工艺路线定义与工单下发，实现生产全流程标准化。
+- **工艺路线与配方管理**：定义不同产品的加工工艺路线（工序顺序、标准工时、所需设备），绑定标准配方（BOM），生产时自动带出投料清单，支持配方版本控制与变更审批。
+- **原材料批次管理**：对原材料实行严格的批次管理，记录批次号、供应商、入库时间、保质期，支持先进先出（FIFO）出库，临期预警自动提醒，过期物料自动冻结不可用于生产。
+- **原料审批出库**：员工提交流程原料申请后，需经管理员审批方可出库领料，审批通过后仓库执行出库操作并扣减库存，确保原料使用合规可控。
+- **多库房管理**：支持常温仓、冷藏仓、冷冻仓、待检区、合格区、不合格区等多库区管理，实时展示各库房库存，支持库存调拨、盘点、预警。
+- **库房统计与预警**：多维度库存统计分析，包括库存总量、库存金额、临期物料统计、滞销物料统计，库存低于安全阈值自动预警。
+- **设备管理与维修**：建立设备台账，记录设备基本信息、维保周期、运行状态，员工可提交设备维修申请，管理员分配维修任务并跟踪维修进度。
+- **订单全流程管理**：用户在线选购商品下单，支持在线支付，管理员处理订单（确认/生产/发货），员工可查看生产相关订单，支持订单状态实时跟踪。
+- **数据统计看板**：多维度数据统计，包括生产统计（产量/合格率/损耗率）、销售统计（销售额/订单数趋势）、库存统计、设备统计（故障率/维修次数），支持图表可视化展示。
+---
+
+## 适用场景
+
+- 中小型食品加工厂生产管理
+- 预制菜工厂订单与生产协同
+- 烘焙/肉制品/饮料工厂制造执行
+- 食品分装厂批次追溯与库存管控
+- 工贸一体食品企业产供销存管理
+- 食品行业教学实训平台
+---
+
+## 功能模块概览
+
+## 管理员端
+
+管理员拥有系统最高权限，负责平台全部业务的配置与管理：
+
+### 基础数据管理
+
+- **员工管理**：管理系统员工信息，包括姓名、工号、岗位（生产/仓库/设备/质检）、所属车间、手机号、角色权限、账户状态，支持员工账号启用/禁用。
+- **客户管理**：管理客户档案，包括客户名称、类型（个人/企业）、联系人、联系方式、地址、信用等级、历史订单，支持客户分组。
+- **原材料管理**：管理原材料主数据，包括原料编码、名称、分类、规格、单位、供应商、保质期、储存条件（常温/冷藏/冷冻）、安全库存、批次管理开关。
+- **工艺路线管理**：定义产品工艺路线，包括工序名称、工序顺序、标准工时、所需设备、操作规范，支持工艺路线版本管理与生效/失效控制。
+- **流程管理**：管理四大制造阶段流程配置——初级产品加工、二次加工、食品制造、食品分装，支持各阶段工序定义、流转规则、质检点配置。
+
+### 生产与流程管理
+
+- **食品制造流程**：查看与管控生产工单，包括工单编号、关联产品、计划数量、工艺路线、当前工序、生产状态（待开工/执行中/已完成），支持工单下发、暂停、完工确认。
+- **原料审批出库**：审批员工提交的流程原料申请，查看申请详情（申请人、关联工单/流程、原料明细、数量、用途），执行审批操作（通过/驳回），审批通过后触发仓库出库。
+
+### 仓储与库存管理
+
+- **库房管理**：管理仓库/库房信息，包括仓库编号、名称、类型（常温/冷藏/冷冻）、地址、容量、负责人、库区划分，支持多仓库管理。
+- **库房统计**：多维度库存统计，包括各仓库库存总量、库存金额、临期物料数量、滞销物料列表，支持按原料/半成品/成品分类统计。
+- **出库管理**：管理各类出库业务，包括生产领料出库、销售出库、调拨出库、报废出库，支持出库单审核与出库记录查询。
+
+### 订单与销售管理
+
+- **订单管理**：查看所有销售订单，包括订单号、客户、下单时间、商品明细、订单金额、订单状态（待付款/待生产/生产中/待发货/已发货/已完成/已取消），支持订单筛选与批量操作。
+- **订单支付记录**：查看所有订单的支付记录，包括订单号、支付金额、支付方式、支付时间、支付状态，支持财务对账与导出。
+
+### 设备与统计
+
+- **设备管理**：管理生产设备台账，包括设备编号、名称、型号、所属车间、购置日期、维保周期、运行状态（正常/故障/维修中/报废），支持设备维保计划配置。
+- **数据统计**：综合数据看板，展示核心经营指标（今日产量/订单数/库存预警数/设备故障数），支持生产统计、销售统计、库存统计、设备统计多维度分析，支持图表可视化与报表导出。
+
+## 员工端
+
+员工为生产执行层用户，负责生产操作、设备维保与库房日常管理：
+
+### 账号与个人
+
+- **员工信息**：查看个人基本信息，包括姓名、工号、岗位、所属车间、联系方式，支持查看个人历史工单与维修记录。
+- **修改密码**：支持员工自主修改登录密码，保障账户安全。
+
+### 生产执行
+
+- **食品制造流程**：查看分配给自己的生产工单，包括工单详情、工艺路线、工序要求、投料清单，支持工序报工（开工/完工确认）、生产进度反馈。
+- **流程原料申请**：根据生产工单提交原料领用申请，填写申请原料明细、数量、用途说明，提交后等待管理员审批，审批通过后可到仓库领料。
+
+### 设备与库房
+
+- **设备维修**：提交设备维修申请，填写故障设备、故障描述、紧急程度，支持上传故障图片，提交后等待管理员分配维修，可跟踪维修进度。
+- **库房管理**：查看所负责库房的库存信息，包括原料/半成品/成品库存明细，支持入库登记、出库确认、库存盘点操作。
+- **订单管理**：查看与生产相关的订单信息，了解订单产品需求与交期，辅助生产排程安排。
+
+## 用户端（客户）
+
+用户为系统的商品采购方，提供完整的商品选购与订单管理功能：
+
+### 账号与个人
+
+- **用户注册**：支持手机号+验证码注册登录、账号密码登录，支持找回密码。
+- **用户信息**：查看与编辑个人基本信息，包括昵称、头像、手机号、邮箱，支持修改密码与安全设置。
+- **收货地址管理**：管理个人收货地址，包括新增、编辑、删除收货地址，设置默认地址，支持省市区选择与详细地址录入。
+
+### 商品与订单
+
+- **商品选购**：浏览工厂可售商品列表，支持按分类/关键词搜索，查看商品详情（图片、规格、价格、库存、描述），选择商品与数量加入购物车，支持批量下单。
+- **订单支付**：对待付款订单进行在线支付，支持支付宝、微信支付等多种支付方式，支付成功后自动更新订单状态。
+- **订单管理**：查看本人所有订单，包括订单号、商品明细、订单金额、订单状态、下单时间，支持订单筛选（待付款/待发货/已发货/已完成），支持取消待付款订单。
+- **订单评价**：对已完成订单进行评价，包括商品评分（1-5星）、服务评分、评价内容，评价提交后不可修改，支持查看历史评价记录。
+
+---
+
+## 项目结构
+
+```text
+pharmacy-dispensing-system/
+├── backend/            # 后端 API 服务
+│   ├── src/
+│   │   ├── controllers/  # 控制器
+│   │   ├── models/       # 数据模型
+│   │   ├── routes/       # 路由
+│   │   └── services/     # 业务逻辑
+│   └── package.json
+├── frontend/           # 前端 Web 应用
+│   ├── src/
+│   │   ├── views/      # 页面视图
+│   │   ├── components/ # 公共组件
+│   │   └── store/      # 状态管理
+│   └── package.json
+├── docs/               # 项目文档与 API 接口说明
+├── LICENSE
+└── README.md
+```
+---
 
 
 #### 前台启动方式
@@ -73,27 +169,27 @@ WebStorm OR VScode 编译器 [https://www.jianshu.com/p/d63b5bae9dff]
 #### 默认后台账户密码
 [管理员]
 admin
-1234qwer
+123456
+
+[用户]
+fank
+123456
 
 #### 项目截图
-暂无
-
 |  |  |
 |---------------------|---------------------|
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/10e53904-f0ac-42af-91a2-80af13b94365.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/64212323-3d67-48d3-a433-6eb126355fcf.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/28a75739-f367-46ff-b925-a9a26b548fe5.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/af6f5c1e-cce1-438d-8e0d-a9d72356c11c.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/81e871e2-21bf-49b7-aca2-0d31b49d6ed8.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/b39a5f63-5e02-4cea-b547-5b3a3d3b8a74.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/96c0f440-0a1b-4a2d-8ff6-5933eca13f64.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/b760f9ba-b646-4324-b92a-c2c9271a7431.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/224cc8cd-6b63-4be7-81a8-05a36aa62cbd.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/c0d65b77-b0fa-42bc-9451-45be269f39c2.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/447afaed-e088-4935-8437-78cf41e3bf4f.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/c92d9253-453a-4659-a606-173f7d57824d.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/746cae70-b51f-4d2b-b40d-2f29197182ae.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/c240736f-c448-4874-bcf6-028bcd6a046a.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/2774fd30-1548-4b51-9935-9c482dde32c0.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/cbd36fdc-4b06-4276-b005-205959bca8aa.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/9349c471-7b1f-42b7-b4d8-a67780ad9085.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/efc0d2fc-7c1b-4813-897e-5cea29e66c1f.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/43604d17-de0a-4226-82d7-4e9e3257d38b.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/4a0ce975-9fc8-42d4-9e5b-e5ac0236b930.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/50124b35-be44-4eba-a955-da7d8e3d27cd.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/07c72027-7a74-42d8-b794-f4d38fd02d9e.png) |
-| ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/610008af-6136-4089-a99e-e844a9e9b365.png) | ![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/8ebb5e2d-f6b8-48f6-8f54-4ab8d61d06f2.png) |
-
-![](https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/work/936e9baf53eb9a217af4f89c616dc19.png)
+| ![](./assets/image%20(1).png) | ![](./assets/image%20(2).png) |
+| ![](./assets/image%20(3).png) | ![](./assets/image%20(4).png) |
+| ![](./assets/image%20(5).png) | ![](./assets/image%20(6).png) |
+| ![](./assets/image%20(7).png) | ![](./assets/image%20(8).png) |
+| ![](./assets/image%20(9).png) | ![](./assets/image%20(10).png) |
+| ![](./assets/image%20(11).png) | ![](./assets/image%20(12).png) |
+| ![](./assets/image%20(13).png) | ![](./assets/image%20(14).png) |
+| ![](./assets/image%20(15).png) | ![](./assets/image%20(16).png) |
+| ![](./assets/image%20(17).png) | ![](./assets/image%20(18).png) |
+| ![](./assets/image%20(19).png) | ![](./assets/image%20(20).png) |
+| ![](./assets/image%20(21).png) | ![](./assets/image%20(22).png) |
+| ![](./assets/image%20(23).png) | ![](./assets/image%20(24).png) |
 
 #### 演示视频
 
@@ -111,7 +207,10 @@ WeChat: `Storm_Berserker`
 
 > 项目部署调试不好包退！功能逻辑没讲明白包退！
 
+<div align=center><img align="center" src="./assets/product_word.png" alt="fankekeke" /></div>
+
 #### 其它资源
+[2026年-答辩顺利通过-客户评价🀄](https://berserker287.github.io/2026/06/29/2026%E5%B9%B4%E7%AD%94%E8%BE%A9%E9%A1%BA%E5%88%A9%E9%80%9A%E8%BF%87/)
 
 [2025年-答辩顺利通过-客户评价🍜](https://berserker287.github.io/2025/06/18/2025%E5%B9%B4%E7%AD%94%E8%BE%A9%E9%A1%BA%E5%88%A9%E9%80%9A%E8%BF%87/)
 
@@ -135,4 +234,8 @@ WeChat: `Storm_Berserker`
 
 More info: [悲伤的橘子树](https://berserker287.github.io/)
 
-<p><img align="center" src="https://fank-bucket-oss.oss-cn-beijing.aliyuncs.com/img/%E5%90%88%E4%BD%9C%E7%89%A9%E6%96%99%E6%A0%B7%E5%BC%8F%20(3).png" alt="fankekeke" /></p>
+<div align="center"><img align="center" src="./assets/chat_qr_code.png" alt="fankekeke" width=250 /></div>
+
+<p><img align="center" src="./assets/wechat_group.png" alt="fankekeke" /></p>
+
+**感谢查看**
